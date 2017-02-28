@@ -25,14 +25,14 @@ This project will be implemented with the following technologies:
 
 There will be three scripts involved in this project:
 
--graph.js: will handle rendering the graphs
--equations.js: will handle the input and parsing of expressions/equations
--calculations.js: will handle Riemann sums and derivative approximations
+- graph.js: will handle rendering the graphs
+- equations.js: will handle the input and parsing of expressions/equations
+- calculations.js: will handle Riemann sums and derivative approximations
 
 ## Implementation TimeLine
 
-### Day 1: Download, install, and learn the basics of MathQuill and Math.js. Create webpack.config.js and have webpack up and running.
+Day 1: Download, install, and learn the basics of MathQuill and Math.js. Create webpack.config.js and have webpack up and running.
 
-### Day 2: Work on zooming and panning. Implement drawing secant lines, and Riemann sums rectangles.
+Day 2: Work on zooming and panning. Implement drawing secant lines, and Riemann sums rectangles.
 
-### Day 3: Work on changing delta x, and have the secant lines and Riemann sums graphically change to support multiple delta x's.
+Day 3: Work on changing delta x, and have the secant lines and Riemann sums graphically change to support multiple delta x's.

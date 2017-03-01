@@ -3,7 +3,7 @@ module.exports = {
   context: __dirname,
   entry: './js/calculator.js',
   output: {
-    path: path.resolve(__dirname, 'app', 'assets', 'javascripts'),
+    path: path.resolve(__dirname, 'js'),
     filename: 'bundle.js'
   },
   resolve: {

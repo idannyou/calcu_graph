@@ -23,7 +23,7 @@ class Equation{
   }
 
   extractY(input){
-    return (-1*this.parseEquation.eval({x: input}));
+    return (this.parseEquation.eval({x: input}));
   }
 
 

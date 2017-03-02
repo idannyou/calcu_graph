@@ -7,9 +7,9 @@ import Equation from './equation';
 
 
 
-const plotXY = function(graph, equation){
+const plotXY = function(graph, equation, unitsPerTick){
   let numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  graph.drawAxis();
+  graph.drawAxis(unitsPerTick);
   let deltaX = ((graph.xMax - graph.xMin) / numPoints);
   for (var i = 0; i < numPoints + 1; i++) {
     let x = (graph.xMin)+ (deltaX * i);
@@ -24,9 +24,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let equation = new Equation(eq);
   graph.onLoad();
   equation.bindEvent();
+  let unitsPerTick = 1;
   // re-render graph
-  $('#latex').on('DOMSubtreeModified', () => plotXY(graph, equation));
+  $('#latex').on('DOMSubtreeModified', () => plotXY(graph, equation, unitsPerTick));
 
   // gets number of points
-  $('#numPoints').on('change', () => plotXY(graph, equation));
+  $('#numPoints').on('change', () => plotXY(graph, equation, unitsPerTick));
 });

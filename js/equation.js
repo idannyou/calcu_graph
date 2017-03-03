@@ -36,6 +36,12 @@ class Equation{
     return (parseTanLine.eval({x: input}));
   }
 
+  // Riemann Sums
+
+  deltaX(xStart, xEnd, numRec){
+    return (xEnd - xStart)/numRec;
+  }
+
 
 
 

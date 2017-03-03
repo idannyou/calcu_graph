@@ -48,6 +48,19 @@ const displayTracer = function(x,y){
     $('#tCoordinate')[0].value = `(${x},${y})`;
 };
 
+const area = function(graph, equation){
+  let xStart = parseInt($('#lBound')[0].value);
+  let xEnd = parseInt($('#uBound')[0].value);
+  let numRec = parseInt($('#nRec')[0].value);
+  let deltaX = equation.deltaX(xStart, xEnd, numRec);
+  for (var i = 0; i < numRec; i++) {
+    let currX = xStart + i * deltaX;
+    let currY = equation.extractY(currX);
+    graph.drawRec(currX, currY, deltaX, currY);
+  }
+
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   var ctx = canvas.getContext('2d');
   var eq = document.getElementById('latex').innerHTML;
@@ -123,6 +136,12 @@ document.addEventListener('DOMContentLoaded', () => {
   //derivatives
   $('#derivative').on('click', ()=> {
     graph.derivative = document.getElementById('derivative').checked;
+  });
+
+  // integral
+  $('#integral').on('click', ()=> {
+    area(graph, equation);
+    graph.integral = document.getElementById('integral').checked;
   });
 
 });

@@ -20,6 +20,9 @@ class Graph {
     // for derivative
     this.derivative = false;
 
+    // for integral
+    this.integral = false;
+
     this.width = this.canvas.width;
     this.height = this.canvas.height;
     // conversion to get pixels from raw x and y
@@ -137,6 +140,16 @@ class Graph {
     this.ctx.stroke();
   }
 
+  drawRec(x, y, deltaX, deltaY){
+
+    let xPix = this.convertXtoP(x);
+    let yPix = this.convertYtoP(y);
+    let deltaXPix = this.convertXtoP(deltaX) - this.convertXtoP(0);
+    let deltaYPix = this.convertYtoP(0) - this.convertYtoP(deltaY) ;
+    this.ctx.fillRect(xPix, yPix, deltaXPix, deltaYPix);
+
+  }
+
 
 
   convertXtoP(x){
@@ -228,6 +241,8 @@ class Graph {
   offPanning(){
     this.mousedown = false;
   }
+
+
 
 
 

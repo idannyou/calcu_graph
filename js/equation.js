@@ -29,10 +29,11 @@ class Equation{
     return (this.parseDerivative.eval({x: input}));
   }
 
-  extractTanLine(input){
-    let m = extractDyDx(input);
-    let b = extractY(input) - m * input;
-
+  extractTanLine(m, currX, currY, input){
+    let b = currY - m * currX;
+    let string = `${m} * x + ${b}`;
+    let parseTanLine = math.compile(string);
+    return (parseTanLine.eval({x: input}));
   }
 
 

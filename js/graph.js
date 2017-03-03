@@ -131,6 +131,14 @@ class Graph {
     }
   }
 
+  drawLine(xMin, xMax, yMin, yMax){
+    this.ctx.moveTo(this.convertXtoP(xMin), this.convertYtoP(yMin));
+    this.ctx.lineTo(this.convertXtoP(xMax), this.convertYtoP(yMax));
+    this.ctx.stroke();
+  }
+
+
+
   convertXtoP(x){
     // if(x <= 0){
     //   return x * this.xConversion;

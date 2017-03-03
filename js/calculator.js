@@ -12,15 +12,21 @@ const plotXY = function(graph, equation){
     let x = (graph.xMin)+ (deltaX * i);
     let y = equation.extractY(x);
     graph.drawDots(x, y, false);
-    if(graph.derivative){
-      plotTanLine(graph, equation, x);
-    }
+  }
+  if(graph.derivative){
+    plotTanLine(graph, equation);
   }
 };
 
-const plotTanLine = function(graph, equation, x){
-  let y = equation.extractDyDx(x);
-  graph.drawDots(x, y2, false);
+const plotTanLine = function(graph, equation){
+  let currX = graph.clickPos.x;
+  let currY = equation.extractY(currX);
+  let m = equation.extractDyDx(currX);
+  let xMin = graph.xMin;
+  let xMax = graph.xMax;
+  let yMin = equation.extractTanLine(m, currX, currY, xMin);
+  let yMax = equation.extractTanLine(m, currX, currY, xMax);
+  graph.drawLine(xMin, xMax, yMin, yMax);
 };
 
 const tracing = function(graph, equation){

@@ -7,24 +7,24 @@
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
     <!-- bundle -->
     <script src='./js/bundle.js' charset="utf-8"></script>
 
     <!-- mathquill -->
-      <link rel="stylesheet" href="node_modules/mathquill/build/mathquill.css"/>
-
+    <link rel="stylesheet" href="node_modules/mathquill/build/mathquill.css"/>
 
   </head>
   <body>
 
     <p>Type math here: <span id="math-field"></span></p>
     <p>LaTeX of what you typed: <span id="latex"></span></p>
+    <p>Text of what you typed: <span id="textSpan"></span></p>
 
     <script>
       var mathFieldSpan = document.getElementById('math-field');
       var latexSpan = document.getElementById('latex');
+      var textSpan = document.getElementById('textSpan');
 
       var MQ = MathQuill.getInterface(2);
       var mathField = MQ.MathField(mathFieldSpan, {
@@ -33,9 +33,26 @@
         handlers: {
           edit: function() {
             latexSpan.textContent = mathField.latex();
+            textSpan.textContent = replaceText(mathField.text());
           }
         }
       });
+
+      let replaceText = function(txt) {
+       txt = txt.replace("\\l*o*g *", "log10");
+       txt = txt.replace("\\l*n *", "log");
+       txt = txt.replace("\\s*i*n *", "sin");
+       txt = txt.replace("\\c*o*s *", "cos");
+       txt = txt.replace("\\t*a*n *", "tan");
+       txt = txt.replace("\\s*i*n ^-1", "asin");
+       txt = txt.replace("\\c*o*s ^-1", "acos");
+       txt = txt.replace("\\t*a*n ^-1", "atan");
+       txt = txt.replace("a*b*s*", "abs");
+       txt = txt.replace("(*", "(");
+       txt = txt.replace("*)", ")");
+       return txt;
+      }
+
     </script>
     <label for="numPoints"> Number of Points
       <input id='numPoints' type="text"> </input>

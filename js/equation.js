@@ -13,7 +13,7 @@ class Equation{
   }
 
   extractEquation(){
-    this.equation = $('#latex')[0].innerHTML;
+    this.equation = $('#textSpan')[0].innerHTML;
     this.parseEquation = math.compile(this.equation);
     this.derivativeEquation = math.derivative(this.equation, 'x').toString();
     this.parseDerivative = math.compile(this.derivativeEquation);

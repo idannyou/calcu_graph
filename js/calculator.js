@@ -2,11 +2,6 @@ import MathQuill from 'mathquill/build/mathquill';
 import Graph from './graph';
 import Equation from './equation';
 
-
-
-
-
-
 const plotXY = function(graph, equation){
   let numPoints = parseInt($('#numPoints')[0].value) || 1000;
   let unitsPerTick = parseInt($('#unitTicks')[0].value) || 1;
@@ -33,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Event Listeners
 
   //update Equation
-  $('#latex').on('DOMSubtreeModified', () => {
+  $('#textSpan').on('DOMSubtreeModified', () => {
     equation.extractEquation();
   });
 

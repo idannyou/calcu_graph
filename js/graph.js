@@ -179,6 +179,7 @@ class Graph {
     if (this.mousedown === true){
       let xCurr = this.getMousePos(canvas, event).x;
       let yCurr = this.getMousePos(canvas, event).y;
+      // 1.5 to lower the panning speed
       let posDeltaX = (this.clickPos.x - xCurr)/1.5;
       let posDeltaY = (this.clickPos.y - yCurr)/1.5;
       this.clickPos.x = xCurr;

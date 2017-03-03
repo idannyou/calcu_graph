@@ -20,12 +20,22 @@ class Equation{
   }
 
   extractY(input){
+    if(!this.parseEquation) return null;
     return (this.parseEquation.eval({x: input}));
   }
 
   extractDyDx(input){
+    if(!input) return null;
     return (this.parseDerivative.eval({x: input}));
   }
+
+  extractTanLine(input){
+    let m = extractDyDx(input);
+    let b = extractY(input) - m * input;
+
+  }
+
+
 
 
 

@@ -9,8 +9,16 @@ class Graph {
     this.xMax = xMax;
     this.yMin = yMin;
     this.yMax = yMax;
+    // for panning
     this.mousedown = false;
     this.clickPos = null;
+
+    // for tracing
+    this.trace = false;
+    this.graphHash = {};
+
+    // for derivative
+    this.derivative = false;
 
     this.width = this.canvas.width;
     this.height = this.canvas.height;
@@ -51,6 +59,7 @@ class Graph {
     this.ctx.lineTo(this.convertXtoP(this.xMax), this.convertYtoP(0));
     this.ctx.stroke();
 
+
     // draw left ticks
     let xPosL = this.convertXtoP(0);
     let ticks = this.convertXtoP(unitsPerTick) - xPosL;
@@ -60,6 +69,7 @@ class Graph {
       this.ctx.lineTo((xPosL), -500);
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoX(xPosL)}`,(2 + xPosL),10);
+
 
     }
 
@@ -71,6 +81,7 @@ class Graph {
       this.ctx.lineTo((xPosR), -500);
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoX(xPosR)}`,(2 + xPosR),10);
+
     }
 
 
@@ -93,6 +104,7 @@ class Graph {
       this.ctx.lineTo(-500, (yPosB));
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoY(yPosB)}`,10, (-2 + yPosB));
+
     }
 
     // draw top ticks
@@ -103,13 +115,20 @@ class Graph {
       this.ctx.lineTo(-500, (yPosT));
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoY(yPosT)}`, 10, (-2 + yPosT));
+
     }
   }
 
-  drawDots(x, y){
-    this.ctx.beginPath();
-    this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),1,0,2*Math.PI);
-    this.ctx.stroke();
+  drawDots(x, y, trace){
+    if (trace === false){
+      this.ctx.beginPath();
+      this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),1,0,2*Math.PI);
+      this.ctx.stroke();
+    } else if (trace === true){
+      this.ctx.beginPath();
+      this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),8,0,2*Math.PI);
+      this.ctx.stroke();
+    }
   }
 
   convertXtoP(x){
@@ -175,7 +194,6 @@ class Graph {
   }
 
   panning(){
-    console.log(this.mousedown)
     if (this.mousedown === true){
       let xCurr = this.getMousePos(canvas, event).x;
       let yCurr = this.getMousePos(canvas, event).y;
@@ -202,6 +220,7 @@ class Graph {
   offPanning(){
     this.mousedown = false;
   }
+
 
 
 }

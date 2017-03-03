@@ -10,12 +10,36 @@ const plotXY = function(graph, equation){
   let deltaX = ((graph.xMax - graph.xMin) / numPoints);
   for (var i = 0; i < numPoints; i++) {
     let x = (graph.xMin)+ (deltaX * i);
-    graph.drawDots(x, equation.extractY(x), numPoints);
+    let y = equation.extractY(x);
+    graph.drawDots(x, y, false);
+    if(graph.derivative){
+      plotTanLine(graph, equation, x);
+    }
+  }
+};
+
+const plotTanLine = function(graph, equation, x){
+  let y = equation.extractDyDx(x);
+  graph.drawDots(x, y2, false);
+};
+
+const tracing = function(graph, equation){
+  if (graph.trace === true){
+    if(!graph.clickPos) return null;
+    let x = graph.clickPos.x;
+    let y = equation.extractY(x);
+    graph.drawDots(x,y, true);
+    displayTracer(x,y);
   }
 };
 
 const displayCoordinate = function({x, y}){
   $('#coordinate')[0].value = `(${x},${y})`;
+};
+
+const displayTracer = function(x,y){
+    y = Math.round(y * 100) / 100;
+    $('#tCoordinate')[0].value = `(${x},${y})`;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // re-render graph
-  $('#latex').on('DOMSubtreeModified', () => plotXY(graph, equation));
+  $('#textSpan').on('DOMSubtreeModified', () => plotXY(graph, equation));
 
   // gets number of points and space between ticks
   $('#numPoints').on('change', () => plotXY(graph, equation));
@@ -78,7 +102,21 @@ document.addEventListener('DOMContentLoaded', () => {
     graph.panning();
     plotXY(graph,equation);
   });
-  $(document).on('mouseup', () => graph.offPanning());
+  $(document).on('mouseup', () =>{
+    graph.offPanning();
+  });
 
+  //tracing
+  $('#canvas').mousemove(() => {
+      tracing(graph,equation);
+    });
+  $('#tracer').on('click', ()=> {
+    graph.trace = document.getElementById('tracer').checked;
+  });
+
+  //derivatives
+  $('#derivative').on('click', ()=> {
+    graph.derivative = document.getElementById('derivative').checked;
+  });
 
 });

@@ -19,6 +19,10 @@ const plotXY = function(graph, equation){
   }
 };
 
+const displayCoordinate = function({x, y}){
+  $('#coordinate')[0].value = `(${x},${y})`;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
   var ctx = canvas.getContext('2d');
   var eq = document.getElementById('latex').innerHTML;
@@ -69,6 +73,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //
 
+  // coordinate
+  canvas.addEventListener('mousemove', (event) => displayCoordinate(graph.getMousePos(canvas, event)));
+
   // panning
-  $('#canvas').on('mousedown', () => console.log('working'))
+  $('#canvas').mousedown( () => {
+    graph.onClick();
+  }).mousemove(() => {
+    graph.panning();
+    plotXY(graph,equation);
+  });
+  $(document).on('mouseup', () => graph.offPanning());
+
+
 });

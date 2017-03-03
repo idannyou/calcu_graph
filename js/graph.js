@@ -2,13 +2,15 @@
 
 class Graph {
 
-  constructor(ctx, xMin = -5, xMax = 10, yMin = -10, yMax = 10){
+  constructor(ctx, xMin = -10, xMax = 10, yMin = -10, yMax = 10){
     this.ctx = ctx;
     this.canvas = ctx.canvas;
     this.xMin = xMin;
     this.xMax = xMax;
     this.yMin = yMin;
     this.yMax = yMax;
+    this.mousedown = false;
+    this.clickPos = null;
 
     this.width = this.canvas.width;
     this.height = this.canvas.height;
@@ -54,18 +56,21 @@ class Graph {
     let ticks = this.convertXtoP(unitsPerTick) - xPosL;
     while (xPosL > this.convertXtoP(this.xMin)){
       xPosL -= ticks;
-      this.ctx.moveTo((xPosL), 5);
-      this.ctx.lineTo((xPosL), -5);
+      this.ctx.moveTo((xPosL), 500);
+      this.ctx.lineTo((xPosL), -500);
       this.ctx.stroke();
+      this.ctx.fillText(`${this.convertPtoX(xPosL)}`,(2 + xPosL),10);
+
     }
 
     // draw right ticks
     let xPosR = this.convertXtoP(0);
     while (xPosR < this.convertXtoP(this.xMax)){
       xPosR += ticks;
-      this.ctx.moveTo((xPosR), 5);
-      this.ctx.lineTo((xPosR), -5);
+      this.ctx.moveTo((xPosR), 500);
+      this.ctx.lineTo((xPosR), -500);
       this.ctx.stroke();
+      this.ctx.fillText(`${this.convertPtoX(xPosR)}`,(2 + xPosR),10);
     }
 
 
@@ -84,17 +89,18 @@ class Graph {
     let ticks = this.convertYtoP(unitsPerTick) - yPosB;
     while (yPosB < this.convertYtoP(this.yMin)){
       yPosB -= ticks;
-      this.ctx.moveTo(5, (yPosB));
-      this.ctx.lineTo(-5, (yPosB));
+      this.ctx.moveTo(500, (yPosB));
+      this.ctx.lineTo(-500, (yPosB));
       this.ctx.stroke();
+      this.ctx.fillText(`${this.convertPtoX(xPosR)}`,(2 + xPosR),10);
     }
 
     // draw top ticks
     let yPosT = this.convertYtoP(0);
     while (yPosT > this.convertYtoP(this.yMax)){
       yPosT += ticks;
-      this.ctx.moveTo(5, (yPosT));
-      this.ctx.lineTo(-5, (yPosT));
+      this.ctx.moveTo(500, (yPosT));
+      this.ctx.lineTo(-500, (yPosT));
       this.ctx.stroke();
     }
   }
@@ -119,6 +125,14 @@ class Graph {
     // } else {
       return parseFloat((y - this.yMax) * this.yConversion);
     // }
+  }
+
+  convertPtoX(xPixal){
+    return Math.round(((xPixal / this.xConversion) + this.xMin)*100)/100;
+  }
+
+  convertPtoY(yPixal){
+    return Math.round(((yPixal / this.yConversion) + this.yMax)*100)/100;
   }
 
   clearGraph(){
@@ -149,6 +163,42 @@ class Graph {
     this.yMax = yMax || this.yMax;
 
     this.clearGraph();
+  }
+
+  getMousePos(canvas, event){
+    var rect = canvas.getBoundingClientRect();
+    return {
+      x: this.convertPtoX((event.clientX - rect.left)),
+      y: this.convertPtoY((event.clientY - rect.top))
+    };
+  }
+
+  panning(){
+    console.log(this.mousedown)
+    if (this.mousedown === true){
+      let xCurr = this.getMousePos(canvas, event).x;
+      let yCurr = this.getMousePos(canvas, event).y;
+      let posDeltaX = (this.clickPos.x - xCurr)/1.5;
+      let posDeltaY = (this.clickPos.y - yCurr)/1.5;
+      this.clickPos.x = xCurr;
+      this.clickPos.y = yCurr;
+      let deltaX = this.xMax - this.xMin;
+      let deltaY = this.yMax - this.yMin;
+      this.xMin = this.xMin - posDeltaX;
+      this.yMin = this.yMin - posDeltaY;
+      this.xMax = this.xMin + deltaX;
+      this.yMax = this.yMin + deltaY;
+    }
+
+  }
+
+  onClick(){
+    this.clickPos = this.getMousePos(canvas, event);
+    this.mousedown = true;
+  }
+
+  offPanning(){
+    this.mousedown = false;
   }
 
 

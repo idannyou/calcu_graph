@@ -92,7 +92,7 @@ class Graph {
       this.ctx.moveTo(500, (yPosB));
       this.ctx.lineTo(-500, (yPosB));
       this.ctx.stroke();
-      this.ctx.fillText(`${this.convertPtoX(xPosR)}`,(2 + xPosR),10);
+      this.ctx.fillText(`${this.convertPtoY(yPosB)}`,10, (-2 + yPosB));
     }
 
     // draw top ticks
@@ -102,6 +102,7 @@ class Graph {
       this.ctx.moveTo(500, (yPosT));
       this.ctx.lineTo(-500, (yPosT));
       this.ctx.stroke();
+      this.ctx.fillText(`${this.convertPtoY(yPosT)}`, 10, (-2 + yPosT));
     }
   }
 

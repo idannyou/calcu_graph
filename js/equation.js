@@ -20,12 +20,12 @@ class Equation{
   }
 
   extractY(input){
-    if(!this.parseEquation) return null;
+    if(!this.parseEquation) return undefined;
     return (this.parseEquation.eval({x: input}));
   }
 
   extractDyDx(input){
-    if(!input) return null;
+    if(!input) return undefined;
     return (this.parseDerivative.eval({x: input}));
   }
 

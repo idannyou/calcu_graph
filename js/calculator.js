@@ -13,14 +13,10 @@ const plotXY = function(graph, equation){
     let y = equation.extractY(x);
     graph.drawDots(x, y);
   }
-  if(graph.derivative){
-    plotTanLine(graph, equation);
-  }
+
 };
 
-const plotTanLine = function(graph, equation){
-  let currX = graph.clickPos.x;
-  let currY = equation.extractY(currX);
+const plotTanLine = function(graph, equation, currX, currY){
   let m = equation.extractDyDx(currX);
   let xMin = graph.xMin;
   let xMax = graph.xMax;
@@ -36,6 +32,11 @@ const tracing = function(graph, equation){
     let y = equation.extractY(x);
     graph.drawTracerDot(x,y);
     displayTracer(x,y);
+
+    if(graph.derivative){
+      plotTanLine(graph, equation, x, y);
+    }
+
   }
 };
 
@@ -49,14 +50,16 @@ const displayTracer = function(x,y){
 };
 
 const area = function(graph, equation){
-  let xStart = parseInt($('#lBound')[0].value);
-  let xEnd = parseInt($('#uBound')[0].value);
-  let numRec = parseInt($('#nRec')[0].value);
-  let deltaX = equation.deltaX(xStart, xEnd, numRec);
-  for (var i = 0; i < numRec; i++) {
-    let currX = xStart + i * deltaX;
-    let currY = equation.extractY(currX);
-    graph.drawRec(currX, currY, deltaX, currY);
+  if (graph.integral === true){
+    let xStart = parseInt($('#lBound')[0].value);
+    let xEnd = parseInt($('#uBound')[0].value);
+    let numRec = parseInt($('#nRec')[0].value);
+    let deltaX = equation.deltaX(xStart, xEnd, numRec);
+    for (var i = 0; i < numRec; i++) {
+      let currX = xStart + i * deltaX;
+      let currY = equation.extractY(currX);
+      graph.drawRec(currX, currY, deltaX, currY);
+    }
   }
 
 };
@@ -145,8 +148,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // integral
   $('#integral').on('click', ()=> {
-    area(graph, equation);
     graph.integral = document.getElementById('integral').checked;
   });
+  $('#canvas').mousemove(() => {
+    area(graph,equation);
+  });
+
 
 });

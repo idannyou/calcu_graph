@@ -11,7 +11,7 @@ const plotXY = function(graph, equation){
   for (var i = 0; i < numPoints; i++) {
     let x = (graph.xMin)+ (deltaX * i);
     let y = equation.extractY(x);
-    graph.drawDots(x, y, false);
+    graph.drawDots(x, y);
   }
   if(graph.derivative){
     plotTanLine(graph, equation);
@@ -32,9 +32,9 @@ const plotTanLine = function(graph, equation){
 const tracing = function(graph, equation){
   if (graph.trace === true){
     if(!graph.clickPos) return null;
-    let x = graph.clickPos.x;
+    let x = graph.getMousePos(canvas, event).x;
     let y = equation.extractY(x);
-    graph.drawDots(x,y, true);
+    graph.drawTracerDot(x,y);
     displayTracer(x,y);
   }
 };
@@ -114,21 +114,26 @@ document.addEventListener('DOMContentLoaded', () => {
   // coordinate
   canvas.addEventListener('mousemove', (event) => displayCoordinate(graph.getMousePos(canvas, event)));
 
+
   // panning
   $('#canvas').mousedown( () => {
     graph.onClick();
-  }).mousemove(() => {
+  });
+
+  $('#canvas').mousemove(() => {
     graph.panning();
     plotXY(graph,equation);
   });
+
   $(document).on('mouseup', () =>{
     graph.offPanning();
   });
 
   //tracing
   $('#canvas').mousemove(() => {
-      tracing(graph,equation);
-    });
+    tracing(graph,equation);
+  });
+
   $('#tracer').on('click', ()=> {
     graph.trace = document.getElementById('tracer').checked;
   });

@@ -122,16 +122,16 @@ class Graph {
     }
   }
 
-  drawDots(x, y, trace){
-    if (trace === false){
-      this.ctx.beginPath();
-      this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),1,0,2*Math.PI);
-      this.ctx.stroke();
-    } else if (trace === true){
-      this.ctx.beginPath();
-      this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),8,0,2*Math.PI);
-      this.ctx.stroke();
-    }
+  drawDots(x, y){
+    this.ctx.beginPath();
+    this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),1,0,2*Math.PI);
+    this.ctx.stroke();
+  }
+
+  drawTracerDot(x, y){
+    this.ctx.beginPath();
+    this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),8,0,2*Math.PI);
+    this.ctx.stroke();
   }
 
   drawLine(xMin, xMax, yMin, yMax){

@@ -56,85 +56,98 @@ class Graph {
   }
 
   drawXAxis(unitsPerTick){
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = 'black';
-    this.ctx.moveTo(this.convertXtoP(this.xMin), this.convertYtoP(0));
-    this.ctx.lineTo(this.convertXtoP(this.xMax), this.convertYtoP(0));
-    this.ctx.stroke();
-
 
     // draw left ticks
     let xPosL = this.convertXtoP(0);
     let ticks = this.convertXtoP(unitsPerTick) - xPosL;
     while (xPosL > this.convertXtoP(this.xMin)){
       xPosL -= ticks;
-      this.ctx.moveTo((xPosL), 500);
-      this.ctx.lineTo((xPosL), -500);
+      this.ctx.fillStyle = 'black';
+      this.ctx.strokeStyle = 'rgb(240,240,240)';
+      this.ctx.beginPath();
+      this.ctx.moveTo((xPosL), this.width);
+      this.ctx.lineTo((xPosL), -1 * this.width);
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoX(xPosL)}`,(2 + xPosL),10);
-
-
     }
 
     // draw right ticks
     let xPosR = this.convertXtoP(0);
     while (xPosR < this.convertXtoP(this.xMax)){
       xPosR += ticks;
-      this.ctx.moveTo((xPosR), 500);
-      this.ctx.lineTo((xPosR), -500);
+      this.ctx.fillStyle = 'black';
+      this.ctx.strokeStyle = 'rgb(240,240,240)';
+      this.ctx.beginPath();
+      this.ctx.moveTo((xPosR), this.width);
+      this.ctx.lineTo((xPosR), -1 * this.width);
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoX(xPosR)}`,(2 + xPosR),10);
-
     }
 
+    //draw axis
+    this.ctx.strokeStyle = 'black';
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.convertXtoP(this.xMin), this.convertYtoP(0));
+    this.ctx.lineTo(this.convertXtoP(this.xMax), this.convertYtoP(0));
+    this.ctx.stroke();
 
   }
 
   drawYAxis(unitsPerTick){
-    this.ctx.beginPath();
-    this.ctx.strokeStyle = 'black';
-    // multiply by negative because canvas positive y goes down =(
-    this.ctx.moveTo(this.convertXtoP(0), this.convertYtoP(this.yMin));
-    this.ctx.lineTo(this.convertXtoP(0), this.convertYtoP(this.yMax));
-    this.ctx.stroke();
 
     // draw bot ticks
     let yPosB = this.convertYtoP(0);
     let ticks = this.convertYtoP(unitsPerTick) - yPosB;
     while (yPosB < this.convertYtoP(this.yMin)){
       yPosB -= ticks;
-      this.ctx.moveTo(500, (yPosB));
-      this.ctx.lineTo(-500, (yPosB));
+      this.ctx.strokeStyle = 'rgb(240,240,240)';
+      this.ctx.fillStyle = 'black';
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.height, (yPosB));
+      this.ctx.lineTo(-1 * this.height, (yPosB));
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoY(yPosB)}`,10, (-2 + yPosB));
-
     }
 
     // draw top ticks
     let yPosT = this.convertYtoP(0);
     while (yPosT > this.convertYtoP(this.yMax)){
       yPosT += ticks;
-      this.ctx.moveTo(500, (yPosT));
-      this.ctx.lineTo(-500, (yPosT));
+      this.ctx.strokeStyle = 'rgb(240,240,240)';
+      this.ctx.fillStyle = 'black';
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.height, (yPosT));
+      this.ctx.lineTo(-1 * this.height, (yPosT));
       this.ctx.stroke();
       this.ctx.fillText(`${this.convertPtoY(yPosT)}`, 10, (-2 + yPosT));
-
     }
+
+    // draw axis
+    this.ctx.strokeStyle = 'black';
+    this.ctx.beginPath();
+    // multiply by negative because canvas positive y goes down =(
+    this.ctx.moveTo(this.convertXtoP(0), this.convertYtoP(this.yMin));
+    this.ctx.lineTo(this.convertXtoP(0), this.convertYtoP(this.yMax));
+    this.ctx.stroke();
+
   }
 
   drawDots(x, y){
+    this.ctx.strokeStyle = 'black';
     this.ctx.beginPath();
     this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),1,0,2*Math.PI);
     this.ctx.stroke();
   }
 
   drawTracerDot(x, y){
+    this.ctx.fillStyle = 'rgb(248, 170, 43)';
     this.ctx.beginPath();
-    this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),8,0,2*Math.PI);
-    this.ctx.stroke();
+    this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),5,0,2*Math.PI);
+    this.ctx.fill();
   }
 
   drawLine(xMin, xMax, yMin, yMax){
+    this.ctx.beginPath();
     this.ctx.moveTo(this.convertXtoP(xMin), this.convertYtoP(yMin));
     this.ctx.lineTo(this.convertXtoP(xMax), this.convertYtoP(yMax));
     this.ctx.stroke();
@@ -145,7 +158,9 @@ class Graph {
     let xPix = this.convertXtoP(x);
     let yPix = this.convertYtoP(y);
     let deltaXPix = this.convertXtoP(deltaX) - this.convertXtoP(0);
-    let deltaYPix = this.convertYtoP(0) - this.convertYtoP(deltaY) ;
+    let deltaYPix = this.convertYtoP(0) - this.convertYtoP(deltaY);
+    this.ctx.fillStyle = 'black';
+    this.ctx.beginPath();
     this.ctx.fillRect(xPix, yPix, deltaXPix, deltaYPix);
 
   }

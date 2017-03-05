@@ -7,6 +7,7 @@ class Equation{
     this.parseEquation = null;
     this.derivativeEquation = math.derivative(equation, 'x').toString();
     this.parseDerivative = null;
+    this.tangentStr = null;
 
     this.extractY = this.extractY.bind(this);
 
@@ -30,8 +31,9 @@ class Equation{
   }
 
   extractTanLine(m, currX, currY, input){
-    let b = currY - m * currX;
+    let b = Math.round((currY - m * currX) * 100) / 100;
     let string = `${m} * x + ${b}`;
+    this.tangentStr = string;
     let parseTanLine = math.compile(string);
     return (parseTanLine.eval({x: input}));
   }

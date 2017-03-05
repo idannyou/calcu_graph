@@ -1,18 +1,127 @@
 .calculator{
   display: flex;
-  background: white;
+  margin: 0 auto;
+  background: whitesmoke;
   font-family: sans-serif;
+  width: 50%;
+  justify-content: center;
+}
+
+button{
+  border: none;
+  width: 100px;
+  margin: 10px;
+  border-radius: 5%;
+}
+
+button:hover {
+  background: rgb(248, 170, 43);
+}
+
+.hidden{
+  display: none;
 }
 
 #canvas{
+  margin: 10px;
   background: gainsboro;
 }
 
 .mathinputs{
   display: flex;
   flex-direction: column;
+  margin: 10px;
 }
 
 .mq-root-block{
   min-width: 50px;
+}
+
+.graphoptions{
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.graphfunctions{
+  display: flex;
+}
+
+.graphreset{
+  display: flex;
+  flex-direction: column;
+}
+
+.numPoints {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.unitTicks {
+  display: flex;
+}
+
+.numPoints label{
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+  margin-right: 10px;
+}
+
+.unitTicks label{
+  display: flex;
+  justify-content: space-between;
+  width: 140px;
+  margin-right: 10px;
+}
+
+.minmax {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.minmax label{
+  width: 50px;
+}
+.bounds input{
+  width: 20px;
+  text-align: center;
+}
+
+.xmin {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.xmax {
+  display: flex;
+  margin-bottom: 10px;
+}
+.ymin {
+  display: flex;
+  margin-bottom: 10px;
+}
+.ymax {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.coordinate input{
+  border: none;
+  background: whitesmoke;
+  max-width: 80px;
+}
+
+.bounds{
+  display: flex;
+  flex-direction: column;
+}
+
+.mousecoordinate{
+  margin-bottom: 10px ;
+}
+
+.integral{
+  margin-bottom: 10px;
 }

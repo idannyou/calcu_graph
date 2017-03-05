@@ -18,103 +18,147 @@
 
   </head>
   <body class='calculator'>
-    <div class='mathinputs'>
-      <p>Type math here: <span id="math-field"></span></p>
-      <p hidden>LaTeX of what you typed: <span id="latex"></span></p>
-      <p hidden>Text of what you typed: <span id="textSpan"></span></p>
-    </div>
+    <div class'content'>
+      <div class='mathinputs'>
+        <p>F(x) = <span id="math-field"></span></p>
+        <p hidden>LaTeX of what you typed: <span id="latex"></span></p>
+        <p hidden>Text of what you typed: <span id="textSpan"></span></p>
 
-    <script>
-      var mathFieldSpan = document.getElementById('math-field');
-      var latexSpan = document.getElementById('latex');
-      var textSpan = document.getElementById('textSpan');
 
-      var MQ = MathQuill.getInterface(2);
-      var mathField = MQ.MathField(mathFieldSpan, {
-        spaceBehavesLikeTab: true,
-        autoCommands: 'pi theta sqrt sum',
-        handlers: {
-          edit: function() {
-            latexSpan.textContent = mathField.latex();
-            textSpan.textContent = replaceText(mathField.text());
+        <script>
+          var mathFieldSpan = document.getElementById('math-field');
+          var latexSpan = document.getElementById('latex');
+          var textSpan = document.getElementById('textSpan');
+
+          var MQ = MathQuill.getInterface(2);
+          var mathField = MQ.MathField(mathFieldSpan, {
+            spaceBehavesLikeTab: true,
+            autoCommands: 'pi theta sqrt sum',
+            handlers: {
+              edit: function() {
+                latexSpan.textContent = mathField.latex();
+                textSpan.textContent = replaceText(mathField.text());
+              }
+            }
+          });
+
+          let replaceText = function(txt) {
+           txt = txt.replace("\\l*o*g *", "log10");
+           txt = txt.replace("\\l*n *", "log");
+           txt = txt.replace("\\s*i*n *", "sin");
+           txt = txt.replace("\\c*o*s *", "cos");
+           txt = txt.replace("\\t*a*n *", "tan");
+           txt = txt.replace("\\s*i*n ^-1", "asin");
+           txt = txt.replace("\\c*o*s ^-1", "acos");
+           txt = txt.replace("\\t*a*n ^-1", "atan");
+           txt = txt.replace("a*b*s*", "abs");
+           txt = txt.replace("(*", "(");
+           txt = txt.replace("*)", ")");
+           return txt;
           }
-        }
-      });
 
-      let replaceText = function(txt) {
-       txt = txt.replace("\\l*o*g *", "log10");
-       txt = txt.replace("\\l*n *", "log");
-       txt = txt.replace("\\s*i*n *", "sin");
-       txt = txt.replace("\\c*o*s *", "cos");
-       txt = txt.replace("\\t*a*n *", "tan");
-       txt = txt.replace("\\s*i*n ^-1", "asin");
-       txt = txt.replace("\\c*o*s ^-1", "acos");
-       txt = txt.replace("\\t*a*n ^-1", "atan");
-       txt = txt.replace("a*b*s*", "abs");
-       txt = txt.replace("(*", "(");
-       txt = txt.replace("*)", ")");
-       return txt;
-      }
+        </script>
+        <div class=graphfunctions>
+          <div class=graphreset>
+            <canvas id='canvas' width='500' height='500'></canvas>
+            <button class='reset'>Reset Window</button>
+          </div>
+          <div>
+            <div class='minmax bounds'>
+              <div class='xmin'>
+                <label for="xMin"> X Min
+                </label>
+                <input id='xMin' type="text"></input>
+              </div>
+              <div class='xmax'>
+                <label for="xMax"> X Max
+                </label>
+                <input id='xMax' type="text"></input>
+              </div>
+              <div class='ymin'>
+                <label for="yMin"> Y Min
+                </label>
+                <input id='yMin' type="text"></input>
+              </div>
+              <div class='ymax'>
+                <label for="yMax"> Y Max
+                </label>
+                <input id='yMax' type="text"></input>
+              </div>
+            </div>
 
-    </script>
+            <div class='coordinate'>
+              <div class='mousecoordinate'>
+                <label for="coordinate"> Mouse Coordinate
+                </label>
+                <input id='coordinate' type="text" disabled></input>
+              </div>
 
-    <div class='graphoptions'>
+              <div>
+                <input id='tracer' type="checkbox"></input>
+                <label for="tracer">Tracer Coordinate
+                </label>
+                <input id='tCoordinate' class='hidden' type="text" disabled></input>
+              </div>
 
-      <h3>Graph Options</h3>
-      <label for="numPoints"> Number of Points
-        <input id='numPoints' type="text"> </input>
-      </label>
+              <div>
+                <input id='derivative' type="checkbox"></input>
+                <label for="derivative">Derivative
+                </label>
+                <input class='derivative hidden' type='text' disabled></input>
+              </div>
+            </div>
 
-      <label for="unitTicks"> Size Between Ticks
-        <input id='unitTicks' type="text"> </input>
-      </label>
 
+            <div>
+              <div class = 'integral'>
+                <input id='integral' type="checkbox"></input>
+                <label for="integral">Integral
+                </label>
+              </div>
+
+              <div class='bounds'>
+                <div>
+                  <label for="nRec" class='nRec hidden'> Number of Rectangles
+                  </label>
+                  <input id='nRec' class='nRec hidden' type="text"></input>
+                </div>
+
+                <div>
+                  <label for="lBound" class='lBound hidden'> Lower Bound
+                  </label>
+                  <input id='lBound' class='lBound hidden' type="text"></input>
+                </div>
+
+                <div>
+                  <label for="uBound" class='uBound hidden'> Upper Bound
+                  </label>
+                  <input id='uBound' class='uBound hidden' type="text"></input>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+        <div class='graphoptions'>
+
+          <div class='numPoints'>
+            <label for="numPoints"> Number of Points
+            </label>
+            <input id='numPoints' type="text"> </input>
+          </div>
+
+          <div class='unitTicks'>
+            <label for="unitTicks"> Size Between Ticks
+            </label>
+            <input id='unitTicks' type="text"> </input>
+          </div>
+
+        </div>
+      </div>
     </div>
-
-    <canvas id='canvas' width='500' height='500'></canvas>
-
-    <button class='reset'>Reset Window</button>
-
-    <label for="coordinate"> Mouse Coordinate
-      <input id='coordinate' type="text" disabled></input>
-    </label>
-
-    <label for="tCoordinate"> Tracer Coordinate
-      <input id='tCoordinate' type="text" disabled></input>
-    </label>
-    <label for="tracer">Tracer
-      <input id='tracer' type="checkbox"></input>
-    </label>
-    <label for="derivative">Derivative
-      <input id='derivative' type="checkbox"></input>
-    </label>
-
-
-    <label for="xMin"> X Min
-      <input id='xMin' type="text"></input>
-    </label>
-    <label for="xMax"> X Max
-      <input id='xMax' type="text"></input>
-    </label>
-    <label for="yMin"> Y Min
-      <input id='yMin' type="text"></input>
-    </label>
-    <label for="yMax"> Y Max
-      <input id='yMax' type="text"></input>
-    </label>
-
-    <label for="integral">Integral
-      <input id='integral' type="checkbox"></input>
-    </label>
-    <label for="nRec"> Number of Rectangles
-      <input id='nRec' type="text"></input>
-    </label>
-    <label for="lBound"> Lower Bound
-      <input id='lBound' type="text"></input>
-    </label>
-    <label for="uBound"> Upper Bound
-      <input id='uBound' type="text"></input>
-    </label>
-
   </body>
 </html>

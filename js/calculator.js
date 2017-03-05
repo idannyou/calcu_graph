@@ -27,6 +27,7 @@ const plotTanLine = function(graph, equation, currX, currY){
   let yMin = equation.extractTanLine(m, currX, currY, xMin);
   let yMax = equation.extractTanLine(m, currX, currY, xMax);
   graph.drawLine(xMin, xMax, yMin, yMax);
+  displayDerivative(equation);
 };
 
 const tracing = function(graph, equation){
@@ -51,6 +52,10 @@ const displayCoordinate = function({x, y}){
 const displayTracer = function(x,y){
     y = Math.round(y * 100) / 100;
     $('#tCoordinate')[0].value = `(${x},${y})`;
+};
+
+const displayDerivative = function(equation){
+  $('.derivative')[0].value = equation.tangentStr;
 };
 
 const area = function(graph, equation){
@@ -97,7 +102,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#xMin').on('change', () => {
     let xMin = parseFloat(document.getElementById('xMin').value);
-    debugger
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph,equation);
   });
@@ -150,16 +154,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#tracer').on('click', ()=> {
     graph.trace = document.getElementById('tracer').checked;
+    (graph.trace)? $('#tCoordinate').removeClass('hidden') :
+      $('#tCoordinate').addClass('hidden');
   });
 
   //derivatives
   $('#derivative').on('click', ()=> {
     graph.derivative = document.getElementById('derivative').checked;
+    (graph.derivative)? $('.derivative').removeClass('hidden') :
+      $('.derivative').addClass('hidden');
   });
 
   // integral
   $('#integral').on('click', ()=> {
     graph.integral = document.getElementById('integral').checked;
+    if (graph.integral){
+      $('.nRec').removeClass('hidden');
+      $('.lBound').removeClass('hidden');
+      $('.uBound').removeClass('hidden');
+    } else {
+      $('.nRec').addClass('hidden');
+      $('.lBound').addClass('hidden');
+      $('.uBound').addClass('hidden');
+    }
+
   });
   $('#canvas').mousemove(() => {
     area(graph,equation);

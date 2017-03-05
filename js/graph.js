@@ -1,5 +1,3 @@
-
-
 class Graph {
 
   constructor(ctx, xMin = -10, xMax = 10, yMin = -10, yMax = 10){
@@ -221,7 +219,7 @@ class Graph {
     this.clearGraph();
   }
 
-  getMousePos(canvas, event){
+  getMousePos(canvas){
     var rect = canvas.getBoundingClientRect();
     return {
       x: this.convertPtoX((event.clientX - rect.left)),
@@ -248,6 +246,19 @@ class Graph {
 
   }
 
+  zooming({x, y}){
+
+    console.log(x)
+    console.log(y)
+
+    let scale = (event.deltaY)/10;
+    this.xMin = this.xMin + scale;
+    this.xMax = this.xMax - scale;
+    this.yMin = this.yMin + scale;
+    this.yMax = this.yMax - scale;
+
+  }
+
   onClick(){
     this.clickPos = this.getMousePos(canvas, event);
     this.mousedown = true;
@@ -256,10 +267,6 @@ class Graph {
   offPanning(){
     this.mousedown = false;
   }
-
-
-
-
 
 }
 

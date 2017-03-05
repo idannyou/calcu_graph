@@ -58,6 +58,7 @@ class Graph {
     // draw left ticks
     let xPosL = this.convertXtoP(0);
     let ticks = this.convertXtoP(unitsPerTick) - xPosL;
+    if (unitsPerTick > (this.xMax - this.xMin)) return null;
     while (xPosL > this.convertXtoP(this.xMin)){
       xPosL -= ticks;
       this.ctx.fillStyle = 'black';
@@ -96,6 +97,7 @@ class Graph {
     // draw bot ticks
     let yPosB = this.convertYtoP(0);
     let ticks = this.convertYtoP(unitsPerTick) - yPosB;
+    if (unitsPerTick > (this.yMax - this.yMin)) return null;
     while (yPosB < this.convertYtoP(this.yMin)){
       yPosB -= ticks;
       this.ctx.strokeStyle = 'rgb(240,240,240)';
@@ -199,22 +201,22 @@ class Graph {
   resetWindow(xMin,xMax,yMin,yMax){
     this.clearGraph();
 
-    if(xMin === 0){
-      this.xMin = xMin;
-    }
-    if(xMax === 0){
-      this.xMax = xMax;
-    }
-    if(yMin === 0){
-      this.yMin = yMin;
-    }
-    if(yMax === 0){
-      this.yMax = yMax;
-    }
-    this.xMin = xMin || this.xMin;
-    this.xMax = xMax || this.xMax;
-    this.yMin = yMin || this.yMin;
-    this.yMax = yMax || this.yMax;
+      if(xMin === 0){
+        this.xMin = xMin;
+      }
+      if(xMax === 0){
+        this.xMax = xMax;
+      }
+      if(yMin === 0){
+        this.yMin = yMin;
+      }
+      if(yMax === 0){
+        this.yMax = yMax;
+      }
+      this.xMin = xMin || this.xMin;
+      this.xMax = xMax || this.xMax;
+      this.yMin = yMin || this.yMin;
+      this.yMax = yMax || this.yMax;
 
     this.clearGraph();
   }
@@ -247,15 +249,14 @@ class Graph {
   }
 
   zooming({x, y}){
+      let scale = (event.deltaY)/10;
 
-    console.log(x)
-    console.log(y)
+      this.xMin = (this.xMin) + scale;
+      this.xMax = (this.xMax) - scale;
 
-    let scale = (event.deltaY)/10;
-    this.xMin = this.xMin + scale;
-    this.xMax = this.xMax - scale;
-    this.yMin = this.yMin + scale;
-    this.yMax = this.yMax - scale;
+      this.yMin = (this.yMin)+ scale;
+      this.yMax = (this.yMax)- scale;
+
 
   }
 

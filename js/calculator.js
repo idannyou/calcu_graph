@@ -4,7 +4,7 @@ import Equation from './equation';
 
 const plotXY = function(graph, equation){
   let numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  let unitsPerTick = parseInt($('#unitTicks')[0].value) || 1;
+  let unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
   graph.clearGraph();
   graph.drawAxis(unitsPerTick);
   let deltaX = ((graph.xMax - graph.xMin) / numPoints);
@@ -93,22 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#xMin').on('change', () => {
     let xMin = parseInt(document.getElementById('xMin').value);
-    graph.resetWindow(xMin, null, null, null);
+    graph.resetWindow(xMin, graph.xMax, graph.yMin, gragh.yMax);
     plotXY(graph,equation);
   });
   $('#xMax').on('change', () => {
     let xMax = parseInt(document.getElementById('xMax').value);
-    graph.resetWindow(null, xMax, null, null);
+    graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph,equation);
   });
   $('#yMin').on('change', () => {
     let yMin = parseInt(document.getElementById('yMin').value);
-    graph.resetWindow(null, null, yMin, null);
+    graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph,equation);
   });
   $('#yMax').on('change', () => {
     let yMax = parseInt(document.getElementById('yMax').value);
-    graph.resetWindow(null, null, null, yMax);
+    graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph,equation);
   });
 

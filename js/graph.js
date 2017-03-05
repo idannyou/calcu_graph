@@ -199,7 +199,8 @@ class Graph {
   }
 
   resetWindow(xMin,xMax,yMin,yMax){
-    this.clearGraph();
+
+      this.clearGraph();
 
       if(xMin === 0){
         this.xMin = xMin;
@@ -218,7 +219,8 @@ class Graph {
       this.yMin = yMin || this.yMin;
       this.yMax = yMax || this.yMax;
 
-    this.clearGraph();
+      this.clearGraph();
+
   }
 
   getMousePos(canvas){
@@ -233,9 +235,9 @@ class Graph {
     if (this.mousedown === true){
       let xCurr = this.getMousePos(canvas, event).x;
       let yCurr = this.getMousePos(canvas, event).y;
-      // 1.5 to lower the panning speed
-      let posDeltaX = (this.clickPos.x - xCurr)/1.5;
-      let posDeltaY = (this.clickPos.y - yCurr)/1.5;
+      // constant to lower the panning speed
+      let posDeltaX = (this.clickPos.x - xCurr)/1.2;
+      let posDeltaY = (this.clickPos.y - yCurr)/1.2;
       this.clickPos.x = xCurr;
       this.clickPos.y = yCurr;
       let deltaX = this.xMax - this.xMin;
@@ -249,7 +251,7 @@ class Graph {
   }
 
   zooming({x, y}){
-      let scale = (event.deltaY)/10;
+      let scale = (event.deltaY)/100;
 
       this.xMin = (this.xMin) + scale;
       this.xMax = (this.xMax) - scale;

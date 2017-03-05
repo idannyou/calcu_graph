@@ -5,13 +5,17 @@ import Equation from './equation';
 const plotXY = function(graph, equation){
   let numPoints = parseInt($('#numPoints')[0].value) || 1000;
   let unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
-  graph.clearGraph();
-  graph.drawAxis(unitsPerTick);
-  let deltaX = ((graph.xMax - graph.xMin) / numPoints);
-  for (var i = 0; i < numPoints; i++) {
-    let x = (graph.xMin)+ (deltaX * i);
-    let y = equation.extractY(x);
-    graph.drawDots(x, y);
+  if (graph.xMax > graph.xMin && graph.yMax > graph.yMin){
+
+    graph.clearGraph();
+    graph.drawAxis(unitsPerTick);
+    let deltaX = ((graph.xMax - graph.xMin) / numPoints);
+    for (var i = 0; i < numPoints; i++) {
+      let x = (graph.xMin)+ (deltaX * i);
+      let y = equation.extractY(x);
+      graph.drawDots(x, y);
+    }
+
   }
 
 };
@@ -92,22 +96,23 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   $('#xMin').on('change', () => {
-    let xMin = parseInt(document.getElementById('xMin').value);
-    graph.resetWindow(xMin, graph.xMax, graph.yMin, gragh.yMax);
+    let xMin = parseFloat(document.getElementById('xMin').value);
+    debugger
+    graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph,equation);
   });
   $('#xMax').on('change', () => {
-    let xMax = parseInt(document.getElementById('xMax').value);
+    let xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph,equation);
   });
   $('#yMin').on('change', () => {
-    let yMin = parseInt(document.getElementById('yMin').value);
+    let yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph,equation);
   });
   $('#yMax').on('change', () => {
-    let yMax = parseInt(document.getElementById('yMax').value);
+    let yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph,equation);
   });

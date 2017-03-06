@@ -20,50 +20,66 @@
   <body class='calculator'>
     <div class'content'>
       <div class='mathinputs'>
-        <p>F(x) = <span id="math-field"></span></p>
-        <p hidden>LaTeX of what you typed: <span id="latex"></span></p>
-        <p hidden>Text of what you typed: <span id="textSpan"></span></p>
-
-
-        <script>
-          var mathFieldSpan = document.getElementById('math-field');
-          var latexSpan = document.getElementById('latex');
-          var textSpan = document.getElementById('textSpan');
-
-          var MQ = MathQuill.getInterface(2);
-          var mathField = MQ.MathField(mathFieldSpan, {
-            spaceBehavesLikeTab: true,
-            autoCommands: 'pi theta sqrt sum',
-            handlers: {
-              edit: function() {
-                latexSpan.textContent = mathField.latex();
-                textSpan.textContent = replaceText(mathField.text());
-              }
-            }
-          });
-
-          let replaceText = function(txt) {
-           txt = txt.replace("\\l*o*g *", "log10");
-           txt = txt.replace("\\l*n *", "log");
-           txt = txt.replace("\\s*i*n *", "sin");
-           txt = txt.replace("\\c*o*s *", "cos");
-           txt = txt.replace("\\t*a*n *", "tan");
-           txt = txt.replace("\\s*i*n ^-1", "asin");
-           txt = txt.replace("\\c*o*s ^-1", "acos");
-           txt = txt.replace("\\t*a*n ^-1", "atan");
-           txt = txt.replace("a*b*s*", "abs");
-           txt = txt.replace("(*", "(");
-           txt = txt.replace("*)", ")");
-           return txt;
-          }
-
-        </script>
         <div class=graphfunctions>
           <div class=graphreset>
             <canvas id='canvas' width='500' height='500'></canvas>
             <button class='reset'>Reset Window</button>
           </div>
           <div>
+            <div>
+
+              <p>F(x) = <span id="math-field"></span></p>
+              <p hidden>LaTeX of what you typed: <span id="latex"></span></p>
+              <p hidden>Text of what you typed: <span id="textSpan"></span></p>
+
+
+              <script>
+                var mathFieldSpan = document.getElementById('math-field');
+                var latexSpan = document.getElementById('latex');
+                var textSpan = document.getElementById('textSpan');
+
+                var MQ = MathQuill.getInterface(2);
+                var mathField = MQ.MathField(mathFieldSpan, {
+                  spaceBehavesLikeTab: true,
+                  autoCommands: 'pi theta sqrt sum',
+                  handlers: {
+                    edit: function() {
+                      latexSpan.textContent = mathField.latex();
+                      textSpan.textContent = replaceText(mathField.text());
+                    }
+                  }
+                });
+
+                let replaceText = function(txt) {
+                 txt = txt.replace("\\l*o*g *", "log10");
+                 txt = txt.replace("\\l*n *", "log");
+                 txt = txt.replace("\\s*i*n *", "sin");
+                 txt = txt.replace("\\c*o*s *", "cos");
+                 txt = txt.replace("\\t*a*n *", "tan");
+                 txt = txt.replace("\\s*i*n ^-1", "asin");
+                 txt = txt.replace("\\c*o*s ^-1", "acos");
+                 txt = txt.replace("\\t*a*n ^-1", "atan");
+                 txt = txt.replace("a*b*s*", "abs");
+                 txt = txt.replace("(*", "(");
+                 txt = txt.replace("*)", ")");
+                 return txt;
+                }
+              </script>
+
+            </div>
+
+            <div class='numPoints'>
+              <label for="numPoints"> Number of Points
+              </label>
+              <input id='numPoints' type="text"> </input>
+            </div>
+
+            <div class='unitTicks'>
+              <label for="unitTicks"> Size Between Ticks
+              </label>
+              <input id='unitTicks' type="text"> </input>
+            </div>
+
             <div class='minmax bounds'>
               <div class='xmin'>
                 <label for="xMin"> X Min
@@ -149,21 +165,7 @@
         </div>
 
 
-        <div class='graphoptions'>
 
-          <div class='numPoints'>
-            <label for="numPoints"> Number of Points
-            </label>
-            <input id='numPoints' type="text"> </input>
-          </div>
-
-          <div class='unitTicks'>
-            <label for="unitTicks"> Size Between Ticks
-            </label>
-            <input id='unitTicks' type="text"> </input>
-          </div>
-
-        </div>
       </div>
     </div>
   </body>

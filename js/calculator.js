@@ -79,7 +79,7 @@ const area = function(graph, equation){
       graph.drawRec(currX, currY, deltaX, currY);
       area += Math.abs(deltaX * currY);
     }
-    $('#area')[0].value = area;
+    $('#area')[0].value = Math.round(area * 100) / 100;
   }
 
 };

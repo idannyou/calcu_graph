@@ -33,12 +33,6 @@ button:hover {
   margin: 10px;
 }
 
-.graphoptions{
-  display: flex;
-  flex-direction: column;
-  margin-top: 10px;
-}
-
 .graphfunctions{
   display: flex;
 }
@@ -50,11 +44,15 @@ button:hover {
 
 .numPoints {
   display: flex;
+  flex-direction: column;
   margin-bottom: 10px;
+  width: 100px;
 }
 
 .unitTicks {
   display: flex;
+  flex-direction: column;
+  width: 100px;
 }
 
 .numPoints label{
@@ -106,7 +104,7 @@ button:hover {
 .coordinate input{
   border: none;
   background: whitesmoke;
-  max-width: 70px;
+  max-width: 80px;
 }
 
 .bounds{
@@ -120,4 +118,8 @@ button:hover {
 
 .integral{
   margin-bottom: 10px;
+}
+
+.area input{
+  border: none;
 }

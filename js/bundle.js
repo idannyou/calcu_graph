@@ -62166,7 +62166,7 @@ var area = function area(graph, equation) {
       graph.drawRec(currX, currY, deltaX, currY);
       _area += Math.abs(deltaX * currY);
     }
-    $('#area')[0].value = _area;
+    $('#area')[0].value = Math.round(_area * 100) / 100;
   }
 };
 

@@ -64,6 +64,8 @@ zooming(){
 }
 ```
 
+![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Inputting_Equation.gif "Scrolling, Zooming, and Entering Equation")
+
 ### Derivative Option
 CalcuGraph allows users to get the equation of the tangent line relative to the tracer point. The Derivative option is to be used with the tracer option.
 

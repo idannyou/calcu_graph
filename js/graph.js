@@ -253,7 +253,7 @@ class Graph {
 
   }
 
-  zooming({x, y}){
+  zooming(){
       let scale = (event.deltaY) / 1000;
         this.xMin = (this.xMin) - (this.xMin * scale);
         this.xMax = (this.xMax) - (this.xMax * scale);

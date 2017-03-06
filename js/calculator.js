@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // zooming
   $('#canvas').on('wheel', () => {
-    graph.zooming(graph.getMousePos(canvas));
+    graph.zooming();
     plotXY(graph,equation);
   });
 

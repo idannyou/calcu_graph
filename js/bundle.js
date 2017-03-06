@@ -432,10 +432,7 @@ var Graph = function () {
     }
   }, {
     key: 'zooming',
-    value: function zooming(_ref) {
-      var x = _ref.x,
-          y = _ref.y;
-
+    value: function zooming() {
       var scale = event.deltaY / 1000;
       this.xMin = this.xMin - this.xMin * scale;
       this.xMax = this.xMax - this.xMax * scale;
@@ -62255,7 +62252,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // zooming
   $('#canvas').on('wheel', function () {
-    graph.zooming(graph.getMousePos(canvas));
+    graph.zooming();
     plotXY(graph, equation);
   });
 

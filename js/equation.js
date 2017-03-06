@@ -32,6 +32,7 @@ class Equation{
 
   extractTanLine(m, currX, currY, input){
     let b = Math.round((currY - m * currX) * 100) / 100;
+    m = Math.round(m * 100) / 100;
     let string = `${m} * x + ${b}`;
     this.tangentStr = string;
     let parseTanLine = math.compile(string);

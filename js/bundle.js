@@ -124,6 +124,7 @@ var Equation = function () {
     key: 'extractTanLine',
     value: function extractTanLine(m, currX, currY, input) {
       var b = Math.round((currY - m * currX) * 100) / 100;
+      m = Math.round(m * 100) / 100;
       var string = m + ' * x + ' + b;
       this.tangentStr = string;
       var parseTanLine = _math2.default.compile(string);

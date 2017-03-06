@@ -81,6 +81,8 @@ extractTanLine(m, currX, currY, input){
   return (parseTanLine.eval({x: input}));
 }
 ```
+![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Derivative_Equation.gif "Derivative Equation")
+
 
 ### Area Under the Curve Option
 CalcuGraph allows users to approximate the area under the curve using the Left End Point Method of Riemann sums. Note that the area under the curve is always positive; ie., even though the y-value is negative, the area will still be positive.
@@ -103,6 +105,7 @@ const area = function(graph, equation){
   }
 };
 ```
+![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Area_Equation.gif "Integral Equation")
 
 
 

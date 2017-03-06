@@ -254,21 +254,11 @@ class Graph {
   }
 
   zooming({x, y}){
-      let scale = (event.deltaY)/100;
-      debugger
-      if (this.xMin < this.xMax && this.yMin < this.yMax){
-        this.xMin = (this.xMin) + scale;
-        this.xMax = (this.xMax) - scale;
-        this.yMin = (this.yMin)+ scale;
-        this.yMax = (this.yMax)- scale;
-      } else {
-        this.xMin = x;
-        this.yMin = y;
-        this.xMax = this.xMin + 1;
-        this.yMax = this.yMin + 1;
-      }
-
-
+      let scale = (event.deltaY) / 1000;
+        this.xMin = (this.xMin) - (this.xMin * scale);
+        this.xMax = (this.xMax) - (this.xMax * scale);
+        this.yMin = (this.yMin) - (this.yMin * scale);
+        this.yMax = (this.yMax) - (this.yMax * scale);
   }
 
   onClick(){

@@ -435,19 +435,11 @@ var Graph = function () {
       var x = _ref.x,
           y = _ref.y;
 
-      var scale = event.deltaY / 100;
-      debugger;
-      if (this.xMin < this.xMax && this.yMin < this.yMax) {
-        this.xMin = this.xMin + scale;
-        this.xMax = this.xMax - scale;
-        this.yMin = this.yMin + scale;
-        this.yMax = this.yMax - scale;
-      } else {
-        this.xMin = x;
-        this.yMin = y;
-        this.xMax = this.xMin + 1;
-        this.yMax = this.yMin + 1;
-      }
+      var scale = event.deltaY / 1000;
+      this.xMin = this.xMin - this.xMin * scale;
+      this.xMax = this.xMax - this.xMax * scale;
+      this.yMin = this.yMin - this.yMin * scale;
+      this.yMax = this.yMax - this.yMax * scale;
     }
   }, {
     key: 'onClick',
@@ -62110,6 +62102,7 @@ var plotXY = function plotXY(graph, equation) {
       var y = equation.extractY(x);
       graph.drawDots(x, y);
     }
+    displayMinMax(graph);
   }
 };
 
@@ -62151,6 +62144,13 @@ var displayTracer = function displayTracer(x, y) {
 
 var displayDerivative = function displayDerivative(equation) {
   $('.derivative')[0].value = equation.tangentStr;
+};
+
+var displayMinMax = function displayMinMax(graph) {
+  $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
+  $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
+  $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
+  $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
 };
 
 var area = function area(graph, equation) {
@@ -62200,6 +62200,7 @@ document.addEventListener('DOMContentLoaded', function () {
     plotXY(graph, equation);
   });
 
+  //min max changes
   $('#xMin').on('change', function () {
     var xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
@@ -62220,6 +62221,12 @@ document.addEventListener('DOMContentLoaded', function () {
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph, equation);
   });
+
+  //initial min max values
+  $('#xMin')[0].value = graph.xMin;
+  $('#xMax')[0].value = graph.xMax;
+  $('#yMin')[0].value = graph.yMin;
+  $('#yMax')[0].value = graph.yMax;
 
   //
 

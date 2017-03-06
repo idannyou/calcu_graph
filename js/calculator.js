@@ -15,6 +15,7 @@ const plotXY = function(graph, equation){
       let y = equation.extractY(x);
       graph.drawDots(x, y);
     }
+    displayMinMax(graph);
 
   }
 
@@ -56,6 +57,13 @@ const displayTracer = function(x,y){
 
 const displayDerivative = function(equation){
   $('.derivative')[0].value = equation.tangentStr;
+};
+
+const displayMinMax = function(graph){
+  $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
+  $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
+  $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
+  $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
 };
 
 const area = function(graph, equation){
@@ -100,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     plotXY(graph,equation);
   });
 
+  //min max changes
   $('#xMin').on('change', () => {
     let xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
@@ -120,6 +129,13 @@ document.addEventListener('DOMContentLoaded', () => {
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph,equation);
   });
+
+  //initial min max values
+  $('#xMin')[0].value = graph.xMin;
+  $('#xMax')[0].value = graph.xMax;
+  $('#yMin')[0].value = graph.yMin;
+  $('#yMax')[0].value = graph.yMax;
+
 
   //
 

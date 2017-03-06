@@ -62155,15 +62155,18 @@ var displayMinMax = function displayMinMax(graph) {
 
 var area = function area(graph, equation) {
   if (graph.integral === true) {
-    var xStart = parseInt($('#lBound')[0].value);
-    var xEnd = parseInt($('#uBound')[0].value);
+    var xStart = parseFloat($('#lBound')[0].value);
+    var xEnd = parseFloat($('#uBound')[0].value);
     var numRec = parseInt($('#nRec')[0].value);
     var deltaX = equation.deltaX(xStart, xEnd, numRec);
+    var _area = 0;
     for (var i = 0; i < numRec; i++) {
       var currX = xStart + i * deltaX;
       var currY = equation.extractY(currX);
       graph.drawRec(currX, currY, deltaX, currY);
+      _area += Math.abs(deltaX * currY);
     }
+    $('#area')[0].value = _area;
   }
 };
 
@@ -62278,10 +62281,16 @@ document.addEventListener('DOMContentLoaded', function () {
       $('.nRec').removeClass('hidden');
       $('.lBound').removeClass('hidden');
       $('.uBound').removeClass('hidden');
+      $('.area').removeClass('hidden');
     } else {
       $('.nRec').addClass('hidden');
       $('.lBound').addClass('hidden');
       $('.uBound').addClass('hidden');
+      $('.area').addClass('hidden');
+      $('.nRec')[1].value = 0;
+      $('.lBound')[1].value = 0;
+      $('.uBound')[1].value = 0;
+      $('.area')[1].value = 0;
     }
   });
   $('#canvas').mousemove(function () {

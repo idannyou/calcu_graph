@@ -68,15 +68,18 @@ const displayMinMax = function(graph){
 
 const area = function(graph, equation){
   if (graph.integral === true){
-    let xStart = parseInt($('#lBound')[0].value);
-    let xEnd = parseInt($('#uBound')[0].value);
+    let xStart = parseFloat($('#lBound')[0].value);
+    let xEnd = parseFloat($('#uBound')[0].value);
     let numRec = parseInt($('#nRec')[0].value);
     let deltaX = equation.deltaX(xStart, xEnd, numRec);
+    let area = 0;
     for (var i = 0; i < numRec; i++) {
       let currX = xStart + i * deltaX;
       let currY = equation.extractY(currX);
       graph.drawRec(currX, currY, deltaX, currY);
+      area += Math.abs(deltaX * currY);
     }
+    $('#area')[0].value = area;
   }
 
 };
@@ -188,10 +191,16 @@ document.addEventListener('DOMContentLoaded', () => {
       $('.nRec').removeClass('hidden');
       $('.lBound').removeClass('hidden');
       $('.uBound').removeClass('hidden');
+      $('.area').removeClass('hidden');
     } else {
       $('.nRec').addClass('hidden');
       $('.lBound').addClass('hidden');
       $('.uBound').addClass('hidden');
+      $('.area').addClass('hidden');
+      $('.nRec')[1].value = 0
+      $('.lBound')[1].value = 0
+      $('.uBound')[1].value = 0
+      $('.area')[1].value = 0
     }
 
   });

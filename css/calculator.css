@@ -33,10 +33,6 @@ button:hover {
   margin: 10px;
 }
 
-.mq-root-block{
-  min-width: 50px;
-}
-
 .graphoptions{
   display: flex;
   flex-direction: column;

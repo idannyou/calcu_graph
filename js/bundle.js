@@ -371,32 +371,35 @@ var Graph = function () {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.xConversion = this.width / (this.xMax - this.xMin);
       this.yConversion = this.height / (this.yMin - this.yMax);
-      // this.translateGraph();
     }
   }, {
     key: 'resetWindow',
     value: function resetWindow(xMin, xMax, yMin, yMax) {
 
-      this.clearGraph();
+      if (xMax > xMin && yMax > yMin) {
+        this.clearGraph();
 
-      if (xMin === 0) {
-        this.xMin = xMin;
-      }
-      if (xMax === 0) {
-        this.xMax = xMax;
-      }
-      if (yMin === 0) {
-        this.yMin = yMin;
-      }
-      if (yMax === 0) {
-        this.yMax = yMax;
-      }
-      this.xMin = xMin || this.xMin;
-      this.xMax = xMax || this.xMax;
-      this.yMin = yMin || this.yMin;
-      this.yMax = yMax || this.yMax;
+        if (xMin === 0) {
+          this.xMin = xMin;
+        }
+        if (xMax === 0) {
+          this.xMax = xMax;
+        }
+        if (yMin === 0) {
+          this.yMin = yMin;
+        }
+        if (yMax === 0) {
+          this.yMax = yMax;
+        }
+        this.xMin = xMin || this.xMin;
+        this.xMax = xMax || this.xMax;
+        this.yMin = yMin || this.yMin;
+        this.yMax = yMax || this.yMax;
 
-      this.clearGraph();
+        this.clearGraph();
+      } else {
+        alert('Check Boundaries');
+      }
     }
   }, {
     key: 'getMousePos',
@@ -433,12 +436,18 @@ var Graph = function () {
           y = _ref.y;
 
       var scale = event.deltaY / 100;
-
-      this.xMin = this.xMin + scale;
-      this.xMax = this.xMax - scale;
-
-      this.yMin = this.yMin + scale;
-      this.yMax = this.yMax - scale;
+      debugger;
+      if (this.xMin < this.xMax && this.yMin < this.yMax) {
+        this.xMin = this.xMin + scale;
+        this.xMax = this.xMax - scale;
+        this.yMin = this.yMin + scale;
+        this.yMax = this.yMax - scale;
+      } else {
+        this.xMin = x;
+        this.yMin = y;
+        this.xMax = this.xMin + 1;
+        this.yMax = this.yMin + 1;
+      }
     }
   }, {
     key: 'onClick',

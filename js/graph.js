@@ -195,11 +195,11 @@ class Graph {
     this.ctx.clearRect(0,0,this.width, this.height);
     this.xConversion = this.width / (this.xMax - this.xMin);
     this.yConversion = this.height / (this.yMin - this.yMax);
-    // this.translateGraph();
   }
 
   resetWindow(xMin,xMax,yMin,yMax){
 
+    if (xMax > xMin && yMax > yMin){
       this.clearGraph();
 
       if(xMin === 0){
@@ -220,6 +220,9 @@ class Graph {
       this.yMax = yMax || this.yMax;
 
       this.clearGraph();
+    } else {
+      alert('Check Boundaries');
+    }
 
   }
 
@@ -252,10 +255,10 @@ class Graph {
 
   zooming({x, y}){
       let scale = (event.deltaY)/100;
+      debugger
       if (this.xMin < this.xMax && this.yMin < this.yMax){
         this.xMin = (this.xMin) + scale;
         this.xMax = (this.xMax) - scale;
-
         this.yMin = (this.yMin)+ scale;
         this.yMax = (this.yMax)- scale;
       } else {

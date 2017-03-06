@@ -1,10 +1,12 @@
+
 .calculator{
   display: flex;
   margin: 0 auto;
-  background: whitesmoke;
   font-family: sans-serif;
   width: 100%;
   justify-content: center;
+  flex-direction: column;
+  background-color: whitesmoke;
 }
 
 .content{
@@ -14,6 +16,7 @@
 
 .heading{
   text-align: center;
+  margin: 10px;
 }
 
 button{
@@ -44,6 +47,7 @@ button:hover {
 
 .graphfunctions{
   display: flex;
+  margin: 0 auto;
 }
 
 .graphreset{
@@ -130,4 +134,25 @@ button:hover {
 
 .area input{
   border: none;
+}
+
+.footer{
+  margin: 0 auto;
+}
+
+.footer ul{
+  margin: 0 auto;
+  display: flex;
+  list-style: none;
+  font-size: 25px;
+}
+
+.footer ul a{
+  margin-right: 10px;
+  text-decoration: none;
+}
+
+.hero{
+  width: 100%;
+
 }

@@ -33,6 +33,18 @@ class View{
     $('#yMax')[0].value = graph.yMax;
   }
 
+  displayHow(){
+    let modal = $('#modal');
+    $(modal).removeClass('hidden');
+  }
+
+  turnoffHow(){
+    let modal = $('#modal');
+    $(modal).addClass('hidden');
+  }
+
+
+
 }
 
 export default View;

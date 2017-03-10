@@ -182,4 +182,14 @@ document.addEventListener('DOMContentLoaded', () => {
     area(graph,equation);
   });
 
+  // instructions
+  $('#howtouse').on('click', () => {
+    view.displayHow();
+  });
+
+  $(document).on('click', ()=>{
+    view.turnoffHow();
+  });
+
+
 });

@@ -62264,6 +62264,15 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#canvas').mousemove(function () {
     area(graph, equation);
   });
+
+  // instructions
+  $('#howtouse').on('click', function () {
+    view.displayHow();
+  });
+
+  $(document).on('click', function () {
+    view.turnoffHow();
+  });
 });
 
 /***/ }),
@@ -62323,6 +62332,18 @@ var View = function () {
       $('#xMax')[0].value = graph.xMax;
       $('#yMin')[0].value = graph.yMin;
       $('#yMax')[0].value = graph.yMax;
+    }
+  }, {
+    key: 'displayHow',
+    value: function displayHow() {
+      var modal = $('#modal');
+      $(modal).removeClass('hidden');
+    }
+  }, {
+    key: 'turnoffHow',
+    value: function turnoffHow() {
+      var modal = $('#modal');
+      $(modal).addClass('hidden');
     }
   }]);
 

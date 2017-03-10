@@ -36,6 +36,15 @@
               <button id='howtouse'>
                 HOW TO CALCUGRAPH
               </button>
+              <button id='howtoinput'>
+                INPUTS
+              </button>
+              <button id='howtoder'>
+                DERIVATIVE
+              </button>
+              <button id='howtoarea'>
+                AREA
+              </button>
             </div>
           </div>
           <div>
@@ -190,7 +199,7 @@
       </ul>
     </footer>
     <div id='modalbackground' class='hidden'>
-      <section id='modal' class='hidden'>
+      <section id='modal' class='howtouse hidden'>
         <p>
           <b>
             F(x):
@@ -207,16 +216,25 @@
           (ex: Number of Points = 100 (Default: 1000 points))<br/><br/>
           -Specify the unit between each tick. <br/>
           (ex: Size Between Ticks = 2 (Default: 1)) <br/><br/>
-          -Specify Min and Max for the X and Y window <br/><br/>
-          -Tracer Coordinate: Check to get the (x,y) value of your function <br/><br/>
-          -Derivative: Must be Checked with Tracer Coordinate option checked. <br/>
-          Derivative option shows the approximate tangent line at a point in mx+b form. <br /><br/>
+          -Specify Min and Max for the X and Y of the window. <br/><br/>
+          -Tracer Coordinate: Check to get the (x,y) value of your function, then click on the graph. <br/><br/>
+          -Derivative: Must be Checked with the Tracer Coordinate option checked. <br/>
+          Derivative option shows an approximated tangent line at the tracer point in mx+b form. <br /><br/>
           -Area Under the Curve: Approximates the area under the curve using Left End Point Riemann Sum <br/>
-          Note that area is always positive.  
+          Note that the area is always positive.  <br/>
           Input the number of Rectangles. The more rectangles, the more accurate the approximation. <br/>
-          Input the range (lower bound and upper bound) of interest.
+          Input the range (lower and upper bounds (x)) of interest.
 
         </p>
+      </section>
+      <section id='modal' class='howtoinput hidden'>
+        <img src="./images/Demo_Function_Input.gif" />
+      </section>
+      <section id='modal' class='howtoder hidden'>
+        <img src="./images/Demo_Derivative.gif" />
+      </section>
+      <section id='modal' class='howtoarea hidden'>
+        <img src="./images/Demo_Integral.gif" />
       </section>
     </div>
   </body>

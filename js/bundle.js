@@ -62266,12 +62266,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // instructions
-  $('#howtouse').on('click', function (e) {
-    view.displayHow(e);
+  $('#howtouse').on('click', function () {
+    view.displayHow('howtouse');
   });
 
-  $(document).on('click', function () {
-    view.turnoffHow();
+  $('#howtoinput').on('click', function () {
+    view.displayHow('howtoinput');
+  });
+
+  $('#howtoder').on('click', function () {
+    view.displayHow('howtoder');
+  });
+
+  $('#howtoarea').on('click', function () {
+    view.displayHow('howtoarea');
   });
 });
 
@@ -62296,6 +62304,7 @@ var View = function () {
 
     this.graph = graph;
     this.equation = equation;
+    this.turnoffHow = this.turnoffHow.bind(this);
   }
 
   _createClass(View, [{
@@ -62335,17 +62344,21 @@ var View = function () {
     }
   }, {
     key: 'displayHow',
-    value: function displayHow(e) {
-      e.stopPropagation();
-      var modal = $('#modal');
+    value: function displayHow(string) {
+      var _this = this;
+
+      event.stopPropagation();
+      var modal = $('.' + string);
       $(modal).removeClass('hidden');
       $('#modalbackground').removeClass('hidden');
+      $(document).on('click', function () {
+        _this.turnoffHow(string);
+      });
     }
   }, {
     key: 'turnoffHow',
-    value: function turnoffHow() {
-      var modal = $('#modal');
-      $(modal).addClass('hidden');
+    value: function turnoffHow(string) {
+      $('.' + string).addClass('hidden');
       $('#modalbackground').addClass('hidden');
     }
   }]);

@@ -4,6 +4,7 @@ class View{
   constructor(graph, equation){
     this.graph = graph;
     this.equation = equation;
+    this.turnoffHow = this.turnoffHow.bind(this);
   }
 
   displayCoordinate({x, y}){
@@ -33,16 +34,18 @@ class View{
     $('#yMax')[0].value = graph.yMax;
   }
 
-  displayHow(e){
-    e.stopPropagation();
-    let modal = $('#modal');
+  displayHow(string){
+    event.stopPropagation();
+    let modal = $(`.${string}`);
     $(modal).removeClass('hidden');
     $('#modalbackground').removeClass('hidden');
+    $(document).on('click', ()=>{
+      this.turnoffHow(string);
+    });
   }
 
-  turnoffHow(){
-    let modal = $('#modal');
-    $(modal).addClass('hidden');
+  turnoffHow(string){
+    $(`.${string}`).addClass('hidden');
     $('#modalbackground').addClass('hidden');
   }
 

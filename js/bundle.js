@@ -62076,6 +62076,10 @@ var _equation = __webpack_require__(0);
 
 var _equation2 = _interopRequireDefault(_equation);
 
+var _view = __webpack_require__(5);
+
+var _view2 = _interopRequireDefault(_view);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var plotXY = function plotXY(graph, equation) {
@@ -62119,13 +62123,6 @@ var tracing = function tracing(graph, equation) {
   }
 };
 
-var displayCoordinate = function displayCoordinate(_ref) {
-  var x = _ref.x,
-      y = _ref.y;
-
-  $('#coordinate')[0].value = '(' + x + ',' + y + ')';
-};
-
 var displayTracer = function displayTracer(x, y) {
   y = Math.round(y * 100) / 100;
   $('#tCoordinate')[0].value = '(' + x + ',' + y + ')';
@@ -62164,6 +62161,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var eq = document.getElementById('latex').innerHTML;
   var graph = new _graph2.default(ctx);
   var equation = new _equation2.default(eq);
+  var view = new _view2.default(graph, equation);
   graph.onLoad();
 
   // Event Listeners
@@ -62224,7 +62222,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // coordinate
   canvas.addEventListener('mousemove', function (event) {
-    return displayCoordinate(graph.getMousePos(canvas));
+    return view.displayCoordinate(graph.getMousePos(canvas));
   });
 
   // panning
@@ -62286,6 +62284,44 @@ document.addEventListener('DOMContentLoaded', function () {
     area(graph, equation);
   });
 });
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var View = function () {
+  function View(graph, equation) {
+    _classCallCheck(this, View);
+
+    this.graph = graph;
+    this.equation = equation;
+  }
+
+  _createClass(View, [{
+    key: 'displayCoordinate',
+    value: function displayCoordinate(_ref) {
+      var x = _ref.x,
+          y = _ref.y;
+
+      $('#coordinate')[0].value = '(' + x + ',' + y + ')';
+    }
+  }]);
+
+  return View;
+}();
+
+exports.default = View;
 
 /***/ })
 /******/ ]);

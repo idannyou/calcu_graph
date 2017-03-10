@@ -1,6 +1,7 @@
 import MathQuill from 'mathquill/build/mathquill';
 import Graph from './graph';
 import Equation from './equation';
+import View from './view';
 
 const plotXY = function(graph, equation){
   let numPoints = parseInt($('#numPoints')[0].value) || 1000;
@@ -46,10 +47,6 @@ const tracing = function(graph, equation){
   }
 };
 
-const displayCoordinate = function({x, y}){
-  $('#coordinate')[0].value = `(${x},${y})`;
-};
-
 const displayTracer = function(x,y){
     y = Math.round(y * 100) / 100;
     $('#tCoordinate')[0].value = `(${x},${y})`;
@@ -89,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var eq = document.getElementById('latex').innerHTML;
   let graph = new Graph(ctx);
   let equation = new Equation(eq);
+  let view = new View(graph, equation);
   graph.onLoad();
 
   // Event Listeners
@@ -143,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //
 
   // coordinate
-  canvas.addEventListener('mousemove', (event) => displayCoordinate(graph.getMousePos(canvas)));
+  canvas.addEventListener('mousemove', (event) => view.displayCoordinate(graph.getMousePos(canvas)));
 
 
   // panning

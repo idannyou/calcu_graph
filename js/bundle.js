@@ -62266,8 +62266,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   // instructions
-  $('#howtouse').on('click', function () {
-    view.displayHow();
+  $('#howtouse').on('click', function (e) {
+    view.displayHow(e);
   });
 
   $(document).on('click', function () {
@@ -62335,15 +62335,18 @@ var View = function () {
     }
   }, {
     key: 'displayHow',
-    value: function displayHow() {
+    value: function displayHow(e) {
+      e.stopPropagation();
       var modal = $('#modal');
       $(modal).removeClass('hidden');
+      $('#modalbackground').removeClass('hidden');
     }
   }, {
     key: 'turnoffHow',
     value: function turnoffHow() {
       var modal = $('#modal');
       $(modal).addClass('hidden');
+      $('#modalbackground').addClass('hidden');
     }
   }]);
 

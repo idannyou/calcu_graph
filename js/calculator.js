@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // instructions
-  $('#howtouse').on('click', () => {
-    view.displayHow();
+  $('#howtouse').on('click', (e) => {
+    view.displayHow(e);
   });
 
   $(document).on('click', ()=>{

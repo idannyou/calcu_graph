@@ -26,6 +26,13 @@ class View{
     $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
   }
 
+  displayInitialMinMax(graph){
+    $('#xMin')[0].value = graph.xMin;
+    $('#xMax')[0].value = graph.xMax;
+    $('#yMin')[0].value = graph.yMin;
+    $('#yMax')[0].value = graph.yMax;
+  }
+
 }
 
 export default View;

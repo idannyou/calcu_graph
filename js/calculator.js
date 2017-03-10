@@ -116,12 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //initial min max values
-  $('#xMin')[0].value = graph.xMin;
-  $('#xMax')[0].value = graph.xMax;
-  $('#yMin')[0].value = graph.yMin;
-  $('#yMax')[0].value = graph.yMax;
-
-
+  view.displayInitialMinMax(graph);
   //
 
   // coordinate

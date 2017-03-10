@@ -62197,11 +62197,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   //initial min max values
-  $('#xMin')[0].value = graph.xMin;
-  $('#xMax')[0].value = graph.xMax;
-  $('#yMin')[0].value = graph.yMin;
-  $('#yMax')[0].value = graph.yMax;
-
+  view.displayInitialMinMax(graph);
   //
 
   // coordinate
@@ -62318,6 +62314,14 @@ var View = function () {
       $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
       $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
       $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
+    }
+  }, {
+    key: 'displayInitialMinMax',
+    value: function displayInitialMinMax(graph) {
+      $('#xMin')[0].value = graph.xMin;
+      $('#xMax')[0].value = graph.xMax;
+      $('#yMin')[0].value = graph.yMin;
+      $('#yMax')[0].value = graph.yMax;
     }
   }]);
 

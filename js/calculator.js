@@ -3,7 +3,7 @@ import Graph from './graph';
 import Equation from './equation';
 import View from './view';
 
-const plotXY = function(graph, equation){
+const plotXY = function(graph, equation, view){
   let numPoints = parseInt($('#numPoints')[0].value) || 1000;
   let unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin){
@@ -16,20 +16,20 @@ const plotXY = function(graph, equation){
       let y = equation.extractY(x);
       graph.drawDots(x, y);
     }
-    displayMinMax(graph);
+    view.displayMinMax(graph);
 
   }
 
 };
 
-const plotTanLine = function(graph, equation, currX, currY){
+const plotTanLine = function(graph, equation, view, currX, currY){
   let m = equation.extractDyDx(currX);
   let xMin = graph.xMin;
   let xMax = graph.xMax;
   let yMin = equation.extractTanLine(m, currX, currY, xMin);
   let yMax = equation.extractTanLine(m, currX, currY, xMax);
   graph.drawLine(xMin, xMax, yMin, yMax);
-  displayDerivative(equation);
+  view.displayDerivative(equation);
 };
 
 const tracing = function(graph, equation, view){
@@ -41,23 +41,10 @@ const tracing = function(graph, equation, view){
     view.displayTracer(x,y);
 
     if(graph.derivative){
-      plotTanLine(graph, equation, x, y);
+      plotTanLine(graph, equation, view, x, y);
     }
 
   }
-};
-
-
-
-const displayDerivative = function(equation){
-  $('.derivative')[0].value = equation.tangentStr;
-};
-
-const displayMinMax = function(graph){
-  $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
-  $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
-  $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
-  $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
 };
 
 const area = function(graph, equation){
@@ -94,38 +81,38 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // re-render graph
-  $('#textSpan').on('DOMSubtreeModified', () => plotXY(graph, equation));
+  $('#textSpan').on('DOMSubtreeModified', () => plotXY(graph, equation, view));
 
   // gets number of points and space between ticks
-  $('#numPoints').on('change', () => plotXY(graph, equation));
-  $('#unitTicks').on('change', () => plotXY(graph, equation));
+  $('#numPoints').on('change', () => plotXY(graph, equation, view));
+  $('#unitTicks').on('change', () => plotXY(graph, equation, view));
 
   //reset window
   $('.reset').on('click', () => {
     graph.resetWindow(-10, 10, -10, 10);
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
 
   //min max changes
   $('#xMin').on('mouseleave', () => {
     let xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
   $('#xMax').on('mouseleave', () => {
     let xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
   $('#yMin').on('mouseleave', () => {
     let yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
   $('#yMax').on('mouseleave', () => {
     let yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
 
   //initial min max values
@@ -148,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#canvas').mousemove(() => {
     graph.panning();
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
 
   $(document).on('mouseup', () =>{
@@ -158,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // zooming
   $('#canvas').on('wheel', () => {
     graph.zooming();
-    plotXY(graph,equation);
+    plotXY(graph, equation, view);
   });
 
   //tracing

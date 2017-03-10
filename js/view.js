@@ -15,6 +15,16 @@ class View{
       $('#tCoordinate')[0].value = `(${x},${y})`;
   }
 
+  displayDerivative(equation){
+    $('.derivative')[0].value = equation.tangentStr;
+  }
+
+  displayMinMax(graph){
+    $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
+    $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
+    $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
+    $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
+  }
 
 }
 

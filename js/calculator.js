@@ -17,9 +17,7 @@ const plotXY = function(graph, equation, view){
       graph.drawDots(x, y);
     }
     view.displayMinMax(graph);
-
   }
-
 };
 
 const plotTanLine = function(graph, equation, view, currX, currY){
@@ -62,7 +60,6 @@ const area = function(graph, equation){
     }
     $('#area')[0].value = Math.round(area * 100) / 100;
   }
-
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -122,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // coordinate
   canvas.addEventListener('mousemove', (event) => view.displayCoordinate(graph.getMousePos(canvas)));
 
-
   // panning
   $('#canvas').mousedown( () => {
     graph.onClick();
@@ -181,9 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
   });
+
   $('#canvas').mousemove(() => {
     area(graph,equation);
   });
-
 
 });

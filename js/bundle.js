@@ -62260,6 +62260,7 @@ document.addEventListener('DOMContentLoaded', function () {
       $('.area')[1].value = 0;
     }
   });
+
   $('#canvas').mousemove(function () {
     area(graph, equation);
   });

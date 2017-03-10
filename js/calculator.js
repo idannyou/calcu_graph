@@ -32,13 +32,13 @@ const plotTanLine = function(graph, equation, currX, currY){
   displayDerivative(equation);
 };
 
-const tracing = function(graph, equation){
+const tracing = function(graph, equation, view){
   if (graph.trace === true){
     if(!graph.clickPos) return null;
     let x = graph.getMousePos(canvas).x;
     let y = equation.extractY(x);
     graph.drawTracerDot(x,y);
-    displayTracer(x,y);
+    view.displayTracer(x,y);
 
     if(graph.derivative){
       plotTanLine(graph, equation, x, y);
@@ -47,10 +47,7 @@ const tracing = function(graph, equation){
   }
 };
 
-const displayTracer = function(x,y){
-    y = Math.round(y * 100) / 100;
-    $('#tCoordinate')[0].value = `(${x},${y})`;
-};
+
 
 const displayDerivative = function(equation){
   $('.derivative')[0].value = equation.tangentStr;
@@ -166,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //tracing
   $('#canvas').mousemove(() => {
-    tracing(graph,equation);
+    tracing(graph, equation, view);
   });
 
   $('#tracer').on('click', ()=> {

@@ -62109,23 +62109,18 @@ var plotTanLine = function plotTanLine(graph, equation, currX, currY) {
   displayDerivative(equation);
 };
 
-var tracing = function tracing(graph, equation) {
+var tracing = function tracing(graph, equation, view) {
   if (graph.trace === true) {
     if (!graph.clickPos) return null;
     var x = graph.getMousePos(canvas).x;
     var y = equation.extractY(x);
     graph.drawTracerDot(x, y);
-    displayTracer(x, y);
+    view.displayTracer(x, y);
 
     if (graph.derivative) {
       plotTanLine(graph, equation, x, y);
     }
   }
-};
-
-var displayTracer = function displayTracer(x, y) {
-  y = Math.round(y * 100) / 100;
-  $('#tCoordinate')[0].value = '(' + x + ',' + y + ')';
 };
 
 var displayDerivative = function displayDerivative(equation) {
@@ -62247,7 +62242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   //tracing
   $('#canvas').mousemove(function () {
-    tracing(graph, equation);
+    tracing(graph, equation, view);
   });
 
   $('#tracer').on('click', function () {
@@ -62315,6 +62310,12 @@ var View = function () {
           y = _ref.y;
 
       $('#coordinate')[0].value = '(' + x + ',' + y + ')';
+    }
+  }, {
+    key: 'displayTracer',
+    value: function displayTracer(x, y) {
+      y = Math.round(y * 100) / 100;
+      $('#tCoordinate')[0].value = '(' + x + ',' + y + ')';
     }
   }]);
 

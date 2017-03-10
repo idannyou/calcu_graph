@@ -341,20 +341,12 @@ var Graph = function () {
   }, {
     key: 'convertXtoP',
     value: function convertXtoP(x) {
-      // if(x <= 0){
-      //   return x * this.xConversion;
-      // } else {
       return parseFloat((x - this.xMin) * this.xConversion);
-      // }
     }
   }, {
     key: 'convertYtoP',
     value: function convertYtoP(y) {
-      // if(y <= 0){
-      //   return y * this.yConversion;
-      // } else {
       return parseFloat((y - this.yMax) * this.yConversion);
-      // }
     }
   }, {
     key: 'convertPtoX',
@@ -376,7 +368,6 @@ var Graph = function () {
   }, {
     key: 'resetWindow',
     value: function resetWindow(xMin, xMax, yMin, yMax) {
-
       if (xMax > xMin && yMax > yMin) {
         this.clearGraph();
 
@@ -62202,22 +62193,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   //min max changes
-  $('#xMin').on('change', function () {
+  $('#xMin').on('mouseleave', function () {
     var xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation);
   });
-  $('#xMax').on('change', function () {
+  $('#xMax').on('mouseleave', function () {
     var xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation);
   });
-  $('#yMin').on('change', function () {
+  $('#yMin').on('mouseleave', function () {
     var yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph, equation);
   });
-  $('#yMax').on('change', function () {
+  $('#yMax').on('mouseleave', function () {
     var yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph, equation);

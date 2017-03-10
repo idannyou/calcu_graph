@@ -112,22 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //min max changes
-  $('#xMin').on('change', () => {
+  $('#xMin').on('mouseleave', () => {
     let xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph,equation);
   });
-  $('#xMax').on('change', () => {
+  $('#xMax').on('mouseleave', () => {
     let xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph,equation);
   });
-  $('#yMin').on('change', () => {
+  $('#yMin').on('mouseleave', () => {
     let yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph,equation);
   });
-  $('#yMax').on('change', () => {
+  $('#yMax').on('mouseleave', () => {
     let yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph,equation);
@@ -197,10 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
       $('.lBound').addClass('hidden');
       $('.uBound').addClass('hidden');
       $('.area').addClass('hidden');
-      $('.nRec')[1].value = 0
-      $('.lBound')[1].value = 0
-      $('.uBound')[1].value = 0
-      $('.area')[1].value = 0
+      $('.nRec')[1].value = 0;
+      $('.lBound')[1].value = 0;
+      $('.uBound')[1].value = 0;
+      $('.area')[1].value = 0;
     }
 
   });

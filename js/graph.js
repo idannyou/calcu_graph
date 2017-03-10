@@ -168,19 +168,11 @@ class Graph {
 
 
   convertXtoP(x){
-    // if(x <= 0){
-    //   return x * this.xConversion;
-    // } else {
       return parseFloat((x - this.xMin) * this.xConversion);
-    // }
   }
 
   convertYtoP(y){
-    // if(y <= 0){
-    //   return y * this.yConversion;
-    // } else {
       return parseFloat((y - this.yMax) * this.yConversion);
-    // }
   }
 
   convertPtoX(xPixal){
@@ -198,7 +190,6 @@ class Graph {
   }
 
   resetWindow(xMin,xMax,yMin,yMax){
-
     if (xMax > xMin && yMax > yMin){
       this.clearGraph();
 

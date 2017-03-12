@@ -64,7 +64,7 @@ zooming(){
 }
 ```
 
-![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Inputting_Equation.gif "Scrolling, Zooming, and Entering Equation")
+![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Inputting_Equation_1.gif "Scrolling, Zooming, and Entering Equation")
 
 ### Derivative Option
 CalcuGraph allows users to get the equation of the tangent line relative to the tracer point. The Derivative option is to be used with the tracer option.
@@ -81,7 +81,7 @@ extractTanLine(m, currX, currY, input){
   return (parseTanLine.eval({x: input}));
 }
 ```
-![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Derivative_Equation.gif "Derivative Equation")
+![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Derivative_Equation_1.gif "Derivative Equation")
 
 
 ### Area Under the Curve Option
@@ -105,7 +105,7 @@ const area = function(graph, equation){
   }
 };
 ```
-![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Area_Equation.gif "Integral Equation")
+![alt text](https://github.com/idannyou/calcu_graph/blob/master/images/Area_Equation_1.gif "Integral Equation")
 
 
 

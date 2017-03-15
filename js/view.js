@@ -36,7 +36,7 @@ class View{
 
   displayHow(string){
     event.stopPropagation();
-    let modal = $(`.${string}`);
+    const modal = $(`.${string}`);
     $(modal).removeClass('hidden');
     $('#modalbackground').removeClass('hidden');
     $(document).on('click', ()=>{
@@ -48,6 +48,12 @@ class View{
     $(`.${string}`).addClass('hidden');
     $('#modalbackground').addClass('hidden');
   }
+
+  // auto-input
+
+  // inputEquation(){
+  //
+  // }
 
 
 

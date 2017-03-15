@@ -50,7 +50,7 @@ class Graph {
 
     // draw left ticks
     let xPosL = this.convertXtoP(0);
-    let ticks = this.convertXtoP(unitsPerTick) - xPosL;
+    const ticks = this.convertXtoP(unitsPerTick) - xPosL;
     if (unitsPerTick > (this.xMax - this.xMin)) return null;
     while (xPosL > this.convertXtoP(this.xMin)){
       xPosL -= ticks;
@@ -89,7 +89,7 @@ class Graph {
 
     // draw bot ticks
     let yPosB = this.convertYtoP(0);
-    let ticks = this.convertYtoP(unitsPerTick) - yPosB;
+    const ticks = this.convertYtoP(unitsPerTick) - yPosB;
     if (unitsPerTick > (this.yMax - this.yMin)) return null;
     while (yPosB < this.convertYtoP(this.yMin)){
       yPosB -= ticks;
@@ -148,10 +148,10 @@ class Graph {
 
   drawRec(x, y, deltaX, deltaY){
 
-    let xPix = this.convertXtoP(x);
-    let yPix = this.convertYtoP(y);
-    let deltaXPix = this.convertXtoP(deltaX) - this.convertXtoP(0);
-    let deltaYPix = this.convertYtoP(0) - this.convertYtoP(deltaY);
+    const xPix = this.convertXtoP(x);
+    const yPix = this.convertYtoP(y);
+    const deltaXPix = this.convertXtoP(deltaX) - this.convertXtoP(0);
+    const deltaYPix = this.convertYtoP(0) - this.convertYtoP(deltaY);
     this.ctx.fillStyle = 'black';
     this.ctx.beginPath();
     this.ctx.fillRect(xPix, yPix, deltaXPix, deltaYPix);
@@ -220,15 +220,15 @@ class Graph {
 
   panning(){
     if (this.mousedown === true){
-      let xCurr = this.getMousePos(canvas, event).x;
-      let yCurr = this.getMousePos(canvas, event).y;
+      const xCurr = this.getMousePos(canvas, event).x;
+      const yCurr = this.getMousePos(canvas, event).y;
       // constant to lower the panning speed
-      let posDeltaX = (this.clickPos.x - xCurr)/1.2;
-      let posDeltaY = (this.clickPos.y - yCurr)/1.2;
+      const posDeltaX = (this.clickPos.x - xCurr)/1.2;
+      const posDeltaY = (this.clickPos.y - yCurr)/1.2;
       this.clickPos.x = xCurr;
       this.clickPos.y = yCurr;
-      let deltaX = this.xMax - this.xMin;
-      let deltaY = this.yMax - this.yMin;
+      const deltaX = this.xMax - this.xMin;
+      const deltaY = this.yMax - this.yMin;
       this.xMin = this.xMin - posDeltaX;
       this.yMin = this.yMin - posDeltaY;
       this.xMax = this.xMin + deltaX;
@@ -238,7 +238,7 @@ class Graph {
   }
 
   zooming(){
-      let scale = (event.deltaY) / 1000;
+      const scale = (event.deltaY) / 1000;
         this.xMin = (this.xMin) - (this.xMin * scale);
         this.xMax = (this.xMax) - (this.xMax * scale);
         this.yMin = (this.yMin) - (this.yMin * scale);

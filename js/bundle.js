@@ -519,6 +519,14 @@ var View = function () {
       $('.' + string).addClass('hidden');
       $('#modalbackground').addClass('hidden');
     }
+
+    // auto-input
+
+    // inputEquation(){
+    //
+    // }
+
+
   }]);
 
   return View;

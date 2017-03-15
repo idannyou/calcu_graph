@@ -4,16 +4,16 @@ import Equation from './equation';
 import View from './view';
 
 const plotXY = function(graph, equation, view){
-  let numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  let unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
+  const numPoints = parseInt($('#numPoints')[0].value) || 1000;
+  const unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin){
 
     graph.clearGraph();
     graph.drawAxis(unitsPerTick);
-    let deltaX = ((graph.xMax - graph.xMin) / numPoints);
-    for (var i = 0; i < numPoints; i++) {
-      let x = (graph.xMin)+ (deltaX * i);
-      let y = equation.extractY(x);
+    const deltaX = ((graph.xMax - graph.xMin) / numPoints);
+    for (let i = 0; i < numPoints; i++) {
+      const x = (graph.xMin)+ (deltaX * i);
+      const y = equation.extractY(x);
       graph.drawDots(x, y);
     }
     view.displayMinMax(graph);
@@ -21,11 +21,11 @@ const plotXY = function(graph, equation, view){
 };
 
 const plotTanLine = function(graph, equation, view, currX, currY){
-  let m = equation.extractDyDx(currX);
-  let xMin = graph.xMin;
-  let xMax = graph.xMax;
-  let yMin = equation.extractTanLine(m, currX, currY, xMin);
-  let yMax = equation.extractTanLine(m, currX, currY, xMax);
+  const m = equation.extractDyDx(currX);
+  const xMin = graph.xMin;
+  const xMax = graph.xMax;
+  const yMin = equation.extractTanLine(m, currX, currY, xMin);
+  const yMax = equation.extractTanLine(m, currX, currY, xMax);
   graph.drawLine(xMin, xMax, yMin, yMax);
   view.displayDerivative(equation);
 };
@@ -33,8 +33,8 @@ const plotTanLine = function(graph, equation, view, currX, currY){
 const tracing = function(graph, equation, view){
   if (graph.trace === true){
     if(!graph.clickPos) return null;
-    let x = graph.getMousePos(canvas).x;
-    let y = equation.extractY(x);
+    const x = graph.getMousePos(canvas).x;
+    const y = equation.extractY(x);
     graph.drawTracerDot(x,y);
     view.displayTracer(x,y);
 
@@ -47,14 +47,14 @@ const tracing = function(graph, equation, view){
 
 const area = function(graph, equation){
   if (graph.integral === true){
-    let xStart = parseFloat($('#lBound')[0].value);
-    let xEnd = parseFloat($('#uBound')[0].value);
-    let numRec = parseInt($('#nRec')[0].value);
-    let deltaX = equation.deltaX(xStart, xEnd, numRec);
+    const xStart = parseFloat($('#lBound')[0].value);
+    const xEnd = parseFloat($('#uBound')[0].value);
+    const numRec = parseInt($('#nRec')[0].value);
+    const deltaX = equation.deltaX(xStart, xEnd, numRec);
     let area = 0;
-    for (var i = 0; i < numRec; i++) {
-      let currX = xStart + i * deltaX;
-      let currY = equation.extractY(currX);
+    for (let i = 0; i < numRec; i++) {
+      const currX = xStart + i * deltaX;
+      const currY = equation.extractY(currX);
       graph.drawRec(currX, currY, deltaX, currY);
       area += Math.abs(deltaX * currY);
     }
@@ -63,11 +63,11 @@ const area = function(graph, equation){
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  var ctx = canvas.getContext('2d');
-  var eq = document.getElementById('latex').innerHTML;
-  let graph = new Graph(ctx);
-  let equation = new Equation(eq);
-  let view = new View(graph, equation);
+  const ctx = canvas.getContext('2d');
+  const eq = document.getElementById('latex').innerHTML;
+  const graph = new Graph(ctx);
+  const equation = new Equation(eq);
+  const view = new View(graph, equation);
   graph.onLoad();
 
   // Event Listeners
@@ -92,22 +92,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //min max changes
   $('#xMin').on('mouseleave', () => {
-    let xMin = parseFloat(document.getElementById('xMin').value);
+    const xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
   $('#xMax').on('mouseleave', () => {
-    let xMax = parseFloat(document.getElementById('xMax').value);
+    const xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
   $('#yMin').on('mouseleave', () => {
-    let yMin = parseFloat(document.getElementById('yMin').value);
+    const yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
   $('#yMax').on('mouseleave', () => {
-    let yMax = parseFloat(document.getElementById('yMax').value);
+    const yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph, equation, view);
   });

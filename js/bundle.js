@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -79,7 +79,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _math = __webpack_require__(3);
+var _math = __webpack_require__(4);
 
 var _math2 = _interopRequireDefault(_math);
 
@@ -207,13 +207,6 @@ var Graph = function () {
         this.drawAxis(1);
       }
     }
-
-    //translate graph
-    // translateGraph(){
-    //   // reset translate
-    //   this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-    //   this.ctx.translate(Math.abs(this.convertXtoP(this.xMin)), Math.abs(this.convertYtoP(this.yMin)));
-    // }
 
     // drawing the axis
 
@@ -450,6 +443,91 @@ exports.default = Graph;
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var View = function () {
+  function View(graph, equation) {
+    _classCallCheck(this, View);
+
+    this.graph = graph;
+    this.equation = equation;
+    this.turnoffHow = this.turnoffHow.bind(this);
+  }
+
+  _createClass(View, [{
+    key: 'displayCoordinate',
+    value: function displayCoordinate(_ref) {
+      var x = _ref.x,
+          y = _ref.y;
+
+      $('#coordinate')[0].value = '(' + x + ',' + y + ')';
+    }
+  }, {
+    key: 'displayTracer',
+    value: function displayTracer(x, y) {
+      y = Math.round(y * 100) / 100;
+      $('#tCoordinate')[0].value = '(' + x + ',' + y + ')';
+    }
+  }, {
+    key: 'displayDerivative',
+    value: function displayDerivative(equation) {
+      $('.derivative')[0].value = equation.tangentStr;
+    }
+  }, {
+    key: 'displayMinMax',
+    value: function displayMinMax(graph) {
+      $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
+      $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
+      $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
+      $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
+    }
+  }, {
+    key: 'displayInitialMinMax',
+    value: function displayInitialMinMax(graph) {
+      $('#xMin')[0].value = graph.xMin;
+      $('#xMax')[0].value = graph.xMax;
+      $('#yMin')[0].value = graph.yMin;
+      $('#yMax')[0].value = graph.yMax;
+    }
+  }, {
+    key: 'displayHow',
+    value: function displayHow(string) {
+      var _this = this;
+
+      event.stopPropagation();
+      var modal = $('.' + string);
+      $(modal).removeClass('hidden');
+      $('#modalbackground').removeClass('hidden');
+      $(document).on('click', function () {
+        _this.turnoffHow(string);
+      });
+    }
+  }, {
+    key: 'turnoffHow',
+    value: function turnoffHow(string) {
+      $('.' + string).addClass('hidden');
+      $('#modalbackground').addClass('hidden');
+    }
+  }]);
+
+  return View;
+}();
+
+exports.default = View;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports) {
 
 /**
@@ -5437,7 +5515,7 @@ for (var key in MQ1) (function(key, val) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -62058,13 +62136,13 @@ module.exports = create();
 });
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _mathquill = __webpack_require__(2);
+var _mathquill = __webpack_require__(3);
 
 var _mathquill2 = _interopRequireDefault(_mathquill);
 
@@ -62076,7 +62154,7 @@ var _equation = __webpack_require__(0);
 
 var _equation2 = _interopRequireDefault(_equation);
 
-var _view = __webpack_require__(5);
+var _view = __webpack_require__(2);
 
 var _view2 = _interopRequireDefault(_view);
 
@@ -62282,91 +62360,6 @@ document.addEventListener('DOMContentLoaded', function () {
     view.displayHow('howtoarea');
   });
 });
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var View = function () {
-  function View(graph, equation) {
-    _classCallCheck(this, View);
-
-    this.graph = graph;
-    this.equation = equation;
-    this.turnoffHow = this.turnoffHow.bind(this);
-  }
-
-  _createClass(View, [{
-    key: 'displayCoordinate',
-    value: function displayCoordinate(_ref) {
-      var x = _ref.x,
-          y = _ref.y;
-
-      $('#coordinate')[0].value = '(' + x + ',' + y + ')';
-    }
-  }, {
-    key: 'displayTracer',
-    value: function displayTracer(x, y) {
-      y = Math.round(y * 100) / 100;
-      $('#tCoordinate')[0].value = '(' + x + ',' + y + ')';
-    }
-  }, {
-    key: 'displayDerivative',
-    value: function displayDerivative(equation) {
-      $('.derivative')[0].value = equation.tangentStr;
-    }
-  }, {
-    key: 'displayMinMax',
-    value: function displayMinMax(graph) {
-      $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
-      $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
-      $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
-      $('#yMax')[0].value = Math.round(graph.yMax * 100) / 100;
-    }
-  }, {
-    key: 'displayInitialMinMax',
-    value: function displayInitialMinMax(graph) {
-      $('#xMin')[0].value = graph.xMin;
-      $('#xMax')[0].value = graph.xMax;
-      $('#yMin')[0].value = graph.yMin;
-      $('#yMax')[0].value = graph.yMax;
-    }
-  }, {
-    key: 'displayHow',
-    value: function displayHow(string) {
-      var _this = this;
-
-      event.stopPropagation();
-      var modal = $('.' + string);
-      $(modal).removeClass('hidden');
-      $('#modalbackground').removeClass('hidden');
-      $(document).on('click', function () {
-        _this.turnoffHow(string);
-      });
-    }
-  }, {
-    key: 'turnoffHow',
-    value: function turnoffHow(string) {
-      $('.' + string).addClass('hidden');
-      $('#modalbackground').addClass('hidden');
-    }
-  }]);
-
-  return View;
-}();
-
-exports.default = View;
 
 /***/ })
 /******/ ]);

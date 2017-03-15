@@ -39,13 +39,6 @@ class Graph {
     }
   }
 
-  //translate graph
-  // translateGraph(){
-  //   // reset translate
-  //   this.ctx.setTransform(1, 0, 0, 1, 0, 0);
-  //   this.ctx.translate(Math.abs(this.convertXtoP(this.xMin)), Math.abs(this.convertYtoP(this.yMin)));
-  // }
-
   // drawing the axis
 
   drawAxis(unitsPerTick){

@@ -91,22 +91,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //min max changes
-  $('#xMin').on('mouseleave', () => {
+  $('#xMin').on('change', () => {
     const xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
-  $('#xMax').on('mouseleave', () => {
+  $('#xMax').on('change', () => {
     const xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
-  $('#yMin').on('mouseleave', () => {
+  $('#yMin').on('change', () => {
     const yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
-  $('#yMax').on('mouseleave', () => {
+  $('#yMax').on('change', () => {
     const yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph, equation, view);

@@ -4,6 +4,7 @@ import Equation from './equation';
 import View from './view';
 
 const plotXY = function(graph, equation, view){
+  event.preventDefault();
   const numPoints = parseInt($('#numPoints')[0].value) || 1000;
   const unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin){
@@ -21,6 +22,7 @@ const plotXY = function(graph, equation, view){
 };
 
 const plotTanLine = function(graph, equation, view, currX, currY){
+  event.preventDefault();
   const m = equation.extractDyDx(currX);
   const xMin = graph.xMin;
   const xMax = graph.xMax;
@@ -31,6 +33,7 @@ const plotTanLine = function(graph, equation, view, currX, currY){
 };
 
 const tracing = function(graph, equation, view){
+  event.preventDefault();
   if (graph.trace === true){
     if(!graph.clickPos) return null;
     const x = graph.getMousePos(canvas).x;
@@ -46,6 +49,7 @@ const tracing = function(graph, equation, view){
 };
 
 const area = function(graph, equation){
+  event.preventDefault();
   if (graph.integral === true){
     const xStart = parseFloat($('#lBound')[0].value);
     const xEnd = parseFloat($('#uBound')[0].value);

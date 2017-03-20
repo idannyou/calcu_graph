@@ -183,6 +183,7 @@ class Graph {
   }
 
   resetWindow(xMin,xMax,yMin,yMax){
+    event.preventDefault();
     if (xMax > xMin && yMax > yMin){
       this.clearGraph();
 

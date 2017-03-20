@@ -361,6 +361,7 @@ var Graph = function () {
   }, {
     key: 'resetWindow',
     value: function resetWindow(xMin, xMax, yMin, yMax) {
+      event.preventDefault();
       if (xMax > xMin && yMax > yMin) {
         this.clearGraph();
 
@@ -471,22 +472,26 @@ var View = function () {
       var x = _ref.x,
           y = _ref.y;
 
+      event.preventDefault();
       $('#coordinate')[0].value = '(' + x + ',' + y + ')';
     }
   }, {
     key: 'displayTracer',
     value: function displayTracer(x, y) {
+      event.preventDefault();
       y = Math.round(y * 100) / 100;
       $('#tCoordinate')[0].value = '(' + x + ',' + y + ')';
     }
   }, {
     key: 'displayDerivative',
     value: function displayDerivative(equation) {
+      event.preventDefault();
       $('.derivative')[0].value = equation.tangentStr;
     }
   }, {
     key: 'displayMinMax',
     value: function displayMinMax(graph) {
+      event.preventDefault();
       $('#xMin')[0].value = Math.round(graph.xMin * 100) / 100;
       $('#xMax')[0].value = Math.round(graph.xMax * 100) / 100;
       $('#yMin')[0].value = Math.round(graph.yMin * 100) / 100;
@@ -495,6 +500,7 @@ var View = function () {
   }, {
     key: 'displayInitialMinMax',
     value: function displayInitialMinMax(graph) {
+      event.preventDefault();
       $('#xMin')[0].value = graph.xMin;
       $('#xMax')[0].value = graph.xMax;
       $('#yMin')[0].value = graph.yMin;
@@ -506,6 +512,7 @@ var View = function () {
       var _this = this;
 
       event.stopPropagation();
+      event.preventDefault();
       var modal = $('.' + string);
       $(modal).removeClass('hidden');
       $('#modalbackground').removeClass('hidden');
@@ -62169,6 +62176,7 @@ var _view2 = _interopRequireDefault(_view);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var plotXY = function plotXY(graph, equation, view) {
+  event.preventDefault();
   var numPoints = parseInt($('#numPoints')[0].value) || 1000;
   var unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin) {
@@ -62186,6 +62194,7 @@ var plotXY = function plotXY(graph, equation, view) {
 };
 
 var plotTanLine = function plotTanLine(graph, equation, view, currX, currY) {
+  event.preventDefault();
   var m = equation.extractDyDx(currX);
   var xMin = graph.xMin;
   var xMax = graph.xMax;
@@ -62196,6 +62205,7 @@ var plotTanLine = function plotTanLine(graph, equation, view, currX, currY) {
 };
 
 var tracing = function tracing(graph, equation, view) {
+  event.preventDefault();
   if (graph.trace === true) {
     if (!graph.clickPos) return null;
     var x = graph.getMousePos(canvas).x;
@@ -62210,6 +62220,7 @@ var tracing = function tracing(graph, equation, view) {
 };
 
 var area = function area(graph, equation) {
+  event.preventDefault();
   if (graph.integral === true) {
     var xStart = parseFloat($('#lBound')[0].value);
     var xEnd = parseFloat($('#uBound')[0].value);

@@ -62261,22 +62261,22 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   //min max changes
-  $('#xMin').on('mouseleave', function () {
+  $('#xMin').on('change', function () {
     var xMin = parseFloat(document.getElementById('xMin').value);
     graph.resetWindow(xMin, graph.xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
-  $('#xMax').on('mouseleave', function () {
+  $('#xMax').on('change', function () {
     var xMax = parseFloat(document.getElementById('xMax').value);
     graph.resetWindow(graph.xMin, xMax, graph.yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
-  $('#yMin').on('mouseleave', function () {
+  $('#yMin').on('change', function () {
     var yMin = parseFloat(document.getElementById('yMin').value);
     graph.resetWindow(graph.xMin, graph.xMax, yMin, graph.yMax);
     plotXY(graph, equation, view);
   });
-  $('#yMax').on('mouseleave', function () {
+  $('#yMax').on('change', function () {
     var yMax = parseFloat(document.getElementById('yMax').value);
     graph.resetWindow(graph.xMin, graph.xMax, graph.yMin, yMax);
     plotXY(graph, equation, view);

@@ -42,12 +42,13 @@ class Graph {
   // drawing the axis
 
   drawAxis(unitsPerTick){
+    event.preventDefault();
     this.drawXAxis(unitsPerTick);
     this.drawYAxis(unitsPerTick);
   }
 
   drawXAxis(unitsPerTick){
-
+    event.preventDefault();
     // draw left ticks
     let xPosL = this.convertXtoP(0);
     const ticks = this.convertXtoP(unitsPerTick) - xPosL;
@@ -86,7 +87,7 @@ class Graph {
   }
 
   drawYAxis(unitsPerTick){
-
+    event.preventDefault();
     // draw bot ticks
     let yPosB = this.convertYtoP(0);
     const ticks = this.convertYtoP(unitsPerTick) - yPosB;
@@ -126,6 +127,7 @@ class Graph {
   }
 
   drawDots(x, y){
+    event.preventDefault();
     this.ctx.strokeStyle = 'black';
     this.ctx.beginPath();
     this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),1,0,2*Math.PI);
@@ -133,6 +135,7 @@ class Graph {
   }
 
   drawTracerDot(x, y){
+    event.preventDefault();
     this.ctx.fillStyle = 'rgb(248, 170, 43)';
     this.ctx.beginPath();
     this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y),5,0,2*Math.PI);
@@ -140,6 +143,7 @@ class Graph {
   }
 
   drawLine(xMin, xMax, yMin, yMax){
+    event.preventDefault();
     this.ctx.beginPath();
     this.ctx.moveTo(this.convertXtoP(xMin), this.convertYtoP(yMin));
     this.ctx.lineTo(this.convertXtoP(xMax), this.convertYtoP(yMax));
@@ -147,7 +151,7 @@ class Graph {
   }
 
   drawRec(x, y, deltaX, deltaY){
-
+    event.preventDefault();
     const xPix = this.convertXtoP(x);
     const yPix = this.convertYtoP(y);
     const deltaXPix = this.convertXtoP(deltaX) - this.convertXtoP(0);
@@ -177,6 +181,7 @@ class Graph {
   }
 
   clearGraph(){
+    event.preventDefault();
     this.ctx.clearRect(0,0,this.width, this.height);
     this.xConversion = this.width / (this.xMax - this.xMin);
     this.yConversion = this.height / (this.yMin - this.yMax);
@@ -212,6 +217,7 @@ class Graph {
   }
 
   getMousePos(canvas){
+    event.preventDefault();
     var rect = canvas.getBoundingClientRect();
     return {
       x: this.convertPtoX((event.clientX - rect.left)),
@@ -220,6 +226,7 @@ class Graph {
   }
 
   panning(){
+    event.preventDefault();
     if (this.mousedown === true){
       const xCurr = this.getMousePos(canvas, event).x;
       const yCurr = this.getMousePos(canvas, event).y;
@@ -239,19 +246,22 @@ class Graph {
   }
 
   zooming(){
-      const scale = (event.deltaY) / 1000;
-        this.xMin = (this.xMin) - (this.xMin * scale);
-        this.xMax = (this.xMax) - (this.xMax * scale);
-        this.yMin = (this.yMin) - (this.yMin * scale);
-        this.yMax = (this.yMax) - (this.yMax * scale);
+    event.preventDefault();
+    const scale = (event.deltaY) / 1000;
+    this.xMin = (this.xMin) - (this.xMin * scale);
+    this.xMax = (this.xMax) - (this.xMax * scale);
+    this.yMin = (this.yMin) - (this.yMin * scale);
+    this.yMax = (this.yMax) - (this.yMax * scale);
   }
 
   onClick(){
+    event.preventDefault();
     this.clickPos = this.getMousePos(canvas, event);
     this.mousedown = true;
   }
 
   offPanning(){
+    event.preventDefault();
     this.mousedown = false;
   }
 

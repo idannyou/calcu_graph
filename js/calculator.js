@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //
 
   // coordinate
-  canvas.addEventListener('mousemove', (event) => view.displayCoordinate(graph.getMousePos(canvas)));
+  canvas.addEventListener('mousemove', () => view.displayCoordinate(graph.getMousePos(canvas)));
 
   // panning
   $('#canvas').mousedown( () => {

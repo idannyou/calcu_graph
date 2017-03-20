@@ -213,13 +213,14 @@ var Graph = function () {
   }, {
     key: 'drawAxis',
     value: function drawAxis(unitsPerTick) {
+      event.preventDefault();
       this.drawXAxis(unitsPerTick);
       this.drawYAxis(unitsPerTick);
     }
   }, {
     key: 'drawXAxis',
     value: function drawXAxis(unitsPerTick) {
-
+      event.preventDefault();
       // draw left ticks
       var xPosL = this.convertXtoP(0);
       var ticks = this.convertXtoP(unitsPerTick) - xPosL;
@@ -258,7 +259,7 @@ var Graph = function () {
   }, {
     key: 'drawYAxis',
     value: function drawYAxis(unitsPerTick) {
-
+      event.preventDefault();
       // draw bot ticks
       var yPosB = this.convertYtoP(0);
       var ticks = this.convertYtoP(unitsPerTick) - yPosB;
@@ -298,6 +299,7 @@ var Graph = function () {
   }, {
     key: 'drawDots',
     value: function drawDots(x, y) {
+      event.preventDefault();
       this.ctx.strokeStyle = 'black';
       this.ctx.beginPath();
       this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y), 1, 0, 2 * Math.PI);
@@ -306,6 +308,7 @@ var Graph = function () {
   }, {
     key: 'drawTracerDot',
     value: function drawTracerDot(x, y) {
+      event.preventDefault();
       this.ctx.fillStyle = 'rgb(248, 170, 43)';
       this.ctx.beginPath();
       this.ctx.arc(this.convertXtoP(x), this.convertYtoP(y), 5, 0, 2 * Math.PI);
@@ -314,6 +317,7 @@ var Graph = function () {
   }, {
     key: 'drawLine',
     value: function drawLine(xMin, xMax, yMin, yMax) {
+      event.preventDefault();
       this.ctx.beginPath();
       this.ctx.moveTo(this.convertXtoP(xMin), this.convertYtoP(yMin));
       this.ctx.lineTo(this.convertXtoP(xMax), this.convertYtoP(yMax));
@@ -322,7 +326,7 @@ var Graph = function () {
   }, {
     key: 'drawRec',
     value: function drawRec(x, y, deltaX, deltaY) {
-
+      event.preventDefault();
       var xPix = this.convertXtoP(x);
       var yPix = this.convertYtoP(y);
       var deltaXPix = this.convertXtoP(deltaX) - this.convertXtoP(0);
@@ -354,6 +358,7 @@ var Graph = function () {
   }, {
     key: 'clearGraph',
     value: function clearGraph() {
+      event.preventDefault();
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.xConversion = this.width / (this.xMax - this.xMin);
       this.yConversion = this.height / (this.yMin - this.yMax);
@@ -390,6 +395,7 @@ var Graph = function () {
   }, {
     key: 'getMousePos',
     value: function getMousePos(canvas) {
+      event.preventDefault();
       var rect = canvas.getBoundingClientRect();
       return {
         x: this.convertPtoX(event.clientX - rect.left),
@@ -399,6 +405,7 @@ var Graph = function () {
   }, {
     key: 'panning',
     value: function panning() {
+      event.preventDefault();
       if (this.mousedown === true) {
         var xCurr = this.getMousePos(canvas, event).x;
         var yCurr = this.getMousePos(canvas, event).y;
@@ -418,6 +425,7 @@ var Graph = function () {
   }, {
     key: 'zooming',
     value: function zooming() {
+      event.preventDefault();
       var scale = event.deltaY / 1000;
       this.xMin = this.xMin - this.xMin * scale;
       this.xMax = this.xMax - this.xMax * scale;
@@ -427,12 +435,14 @@ var Graph = function () {
   }, {
     key: 'onClick',
     value: function onClick() {
+      event.preventDefault();
       this.clickPos = this.getMousePos(canvas, event);
       this.mousedown = true;
     }
   }, {
     key: 'offPanning',
     value: function offPanning() {
+      event.preventDefault();
       this.mousedown = false;
     }
   }]);
@@ -62298,7 +62308,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //
 
   // coordinate
-  canvas.addEventListener('mousemove', function (event) {
+  canvas.addEventListener('mousemove', function () {
     return view.displayCoordinate(graph.getMousePos(canvas));
   });
 

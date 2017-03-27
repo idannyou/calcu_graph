@@ -1,7 +1,6 @@
 # CalcuGraph
 
-[Live!][CalcuGraph]
-[CalcuGraph]: http://dannyou.pro/calcu_graph/
+[CalcuGraph](http://dannyou.pro/calcu_graph/)
 
 ## Summary
 

@@ -62264,6 +62264,15 @@ var handleTracerOff = function handleTracerOff() {
   $('#tCoordinate').addClass('hidden');
   $("#derivative")[0].checked = false;
   $("#derivative").attr("disabled", true);
+  handleDerivativeOff();
+};
+
+var handleDerivativeOn = function handleDerivativeOn() {
+  $('.derivative').removeClass('hidden');
+};
+
+var handleDerivativeOff = function handleDerivativeOff() {
+  $('.derivative').addClass('hidden');
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -62361,7 +62370,7 @@ document.addEventListener('DOMContentLoaded', function () {
   //derivatives
   $('#derivative').on('click', function () {
     graph.derivative = document.getElementById('derivative').checked;
-    graph.derivative ? $('.derivative').removeClass('hidden') : $('.derivative').addClass('hidden');
+    graph.derivative ? handleDerivativeOn() : handleDerivativeOff();
   });
 
   // integral

@@ -83,7 +83,16 @@ const handleTracerOff = function(){
   $('#tCoordinate').addClass('hidden');
   $("#derivative")[0].checked = false;
   $("#derivative").attr("disabled", true);
+  handleDerivativeOff();
 };
+
+const handleDerivativeOn = function(){
+  $('.derivative').removeClass('hidden');
+}
+
+const handleDerivativeOff = function(){
+  $('.derivative').addClass('hidden');
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
@@ -173,8 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
   //derivatives
   $('#derivative').on('click', ()=> {
     graph.derivative = document.getElementById('derivative').checked;
-    (graph.derivative)? $('.derivative').removeClass('hidden') :
-      $('.derivative').addClass('hidden');
+    (graph.derivative)? handleDerivativeOn() :
+      handleDerivativeOff();
   });
 
   // integral

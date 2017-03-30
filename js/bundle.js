@@ -62254,6 +62254,11 @@ var handleTracerOn = function handleTracerOn() {
   $("#derivative").removeAttr("disabled");
 };
 
+var handleTracerOff = function handleTracerOff() {
+  $('#tCoordinate').addClass('hidden');
+  $("#derivative").attr("disabled", true);
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   var ctx = canvas.getContext('2d');
   var eq = document.getElementById('latex').innerHTML;
@@ -62346,7 +62351,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   $('#tracer').on('click', function () {
     graph.trace = document.getElementById('tracer').checked;
-    graph.trace ? handleTracerOn() : $('#tCoordinate').addClass('hidden');
+    graph.trace ? handleTracerOn() : handleTracerOff();
   });
 
   //derivatives

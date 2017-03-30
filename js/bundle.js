@@ -62249,6 +62249,11 @@ var area = function area(graph, equation) {
   }
 };
 
+var handleTracerOn = function handleTracerOn() {
+  $('#tCoordinate').removeClass('hidden');
+  $("#derivative").removeAttr("disabled");
+};
+
 document.addEventListener('DOMContentLoaded', function () {
   var ctx = canvas.getContext('2d');
   var eq = document.getElementById('latex').innerHTML;
@@ -62341,7 +62346,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   $('#tracer').on('click', function () {
     graph.trace = document.getElementById('tracer').checked;
-    graph.trace ? $('#tCoordinate').removeClass('hidden') : $('#tCoordinate').addClass('hidden');
+    graph.trace ? handleTracerOn() : $('#tCoordinate').addClass('hidden');
   });
 
   //derivatives

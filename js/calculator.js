@@ -67,6 +67,11 @@ const area = function(graph, equation){
   }
 };
 
+const handleTracerOn = function(){
+  $('#tCoordinate').removeClass('hidden');
+  $("#derivative").removeAttr("disabled");
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   const ctx = canvas.getContext('2d');
   const eq = document.getElementById('latex').innerHTML;
@@ -151,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   $('#tracer').on('click', ()=> {
     graph.trace = document.getElementById('tracer').checked;
-    (graph.trace)? $('#tCoordinate').removeClass('hidden') :
+    (graph.trace)? handleTracerOn() :
       $('#tCoordinate').addClass('hidden');
   });
 

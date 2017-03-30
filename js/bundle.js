@@ -62260,19 +62260,20 @@ var handleTracerOn = function handleTracerOn() {
   $("#derivative").removeAttr("disabled");
 };
 
-var handleTracerOff = function handleTracerOff() {
+var handleTracerOff = function handleTracerOff(graph) {
   $('#tCoordinate').addClass('hidden');
   $("#derivative")[0].checked = false;
   $("#derivative").attr("disabled", true);
-  handleDerivativeOff();
+  handleDerivativeOff(graph);
 };
 
 var handleDerivativeOn = function handleDerivativeOn() {
   $('.derivative').removeClass('hidden');
 };
 
-var handleDerivativeOff = function handleDerivativeOff() {
+var handleDerivativeOff = function handleDerivativeOff(graph) {
   $('.derivative').addClass('hidden');
+  graph.derivative = false;
 };
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -62364,13 +62365,13 @@ document.addEventListener('DOMContentLoaded', function () {
   //tracing
   $('#tracer').on('click', function () {
     graph.trace = document.getElementById('tracer').checked;
-    graph.trace ? handleTracerOn() : handleTracerOff();
+    graph.trace ? handleTracerOn() : handleTracerOff(graph);
   });
 
   //derivatives
   $('#derivative').on('click', function () {
     graph.derivative = document.getElementById('derivative').checked;
-    graph.derivative ? handleDerivativeOn() : handleDerivativeOff();
+    graph.derivative ? handleDerivativeOn() : handleDerivativeOff(graph);
   });
 
   // integral

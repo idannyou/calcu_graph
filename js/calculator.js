@@ -6,8 +6,7 @@ import View from './view';
 const plotXY = function(graph, equation, view){
   event.preventDefault();
   const numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  const tickSize = (graph.xMax - graph.xMin < 2)? .1 : 1;
-  const unitsPerTick = parseFloat($('#unitTicks')[0].value) || tickSize;
+  const unitsPerTick = parseFloat($('#unitTicks')[0].value) || tickSize(graph);
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin){
 
     graph.clearGraph();
@@ -20,6 +19,14 @@ const plotXY = function(graph, equation, view){
     }
     view.displayMinMax(graph);
   }
+};
+
+const tickSize= function(graph){
+    let delta = graph.xMax - graph.xMin;
+    if (delta > 100) return 20;
+    if (delta > 40) return 5;
+    if (delta < 2) return .1;
+    return 1;
 };
 
 const plotTanLine = function(graph, equation, view, currX, currY){

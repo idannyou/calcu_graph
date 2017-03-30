@@ -62188,8 +62188,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var plotXY = function plotXY(graph, equation, view) {
   event.preventDefault();
   var numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  var tickSize = graph.xMax - graph.xMin < 2 ? .1 : 1;
-  var unitsPerTick = parseFloat($('#unitTicks')[0].value) || tickSize;
+  var unitsPerTick = parseFloat($('#unitTicks')[0].value) || tickSize(graph);
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin) {
 
     graph.clearGraph();
@@ -62202,6 +62201,14 @@ var plotXY = function plotXY(graph, equation, view) {
     }
     view.displayMinMax(graph);
   }
+};
+
+var tickSize = function tickSize(graph) {
+  var delta = graph.xMax - graph.xMin;
+  if (delta > 100) return 20;
+  if (delta > 40) return 5;
+  if (delta < 2) return .1;
+  return 1;
 };
 
 var plotTanLine = function plotTanLine(graph, equation, view, currX, currY) {

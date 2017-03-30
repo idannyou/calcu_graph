@@ -13,7 +13,6 @@ class Graph {
 
     // for tracing
     this.trace = false;
-    this.graphHash = {};
 
     // for derivative
     this.derivative = false;

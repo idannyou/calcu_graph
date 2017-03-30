@@ -36,7 +36,6 @@ const plotTanLine = function(graph, equation, view, currX, currY){
 const tracing = function(graph, equation, view){
   event.preventDefault();
   if (graph.trace === true){
-    if(!graph.clickPos) return null;
     const x = graph.getMousePos(canvas).x;
     const y = equation.extractY(x);
     graph.drawTracerDot(x,y);
@@ -143,6 +142,7 @@ document.addEventListener('DOMContentLoaded', () => {
   $('#canvas').mousemove(() => {
     graph.panning();
     plotXY(graph, equation, view);
+    tracing(graph, equation, view);
   });
 
   $(document).on('mouseup', () =>{
@@ -156,10 +156,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   //tracing
-  $('#canvas').mousemove(() => {
-    tracing(graph, equation, view);
-  });
-
   $('#tracer').on('click', ()=> {
     graph.trace = document.getElementById('tracer').checked;
     (graph.trace)? handleTracerOn() :

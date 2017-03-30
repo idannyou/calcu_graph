@@ -181,7 +181,6 @@ var Graph = function () {
 
     // for tracing
     this.trace = false;
-    this.graphHash = {};
 
     // for derivative
     this.derivative = false;
@@ -62219,7 +62218,6 @@ var plotTanLine = function plotTanLine(graph, equation, view, currX, currY) {
 var tracing = function tracing(graph, equation, view) {
   event.preventDefault();
   if (graph.trace === true) {
-    if (!graph.clickPos) return null;
     var x = graph.getMousePos(canvas).x;
     var y = equation.extractY(x);
     graph.drawTracerDot(x, y);
@@ -62333,6 +62331,7 @@ document.addEventListener('DOMContentLoaded', function () {
   $('#canvas').mousemove(function () {
     graph.panning();
     plotXY(graph, equation, view);
+    tracing(graph, equation, view);
   });
 
   $(document).on('mouseup', function () {
@@ -62346,10 +62345,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   //tracing
-  $('#canvas').mousemove(function () {
-    tracing(graph, equation, view);
-  });
-
   $('#tracer').on('click', function () {
     graph.trace = document.getElementById('tracer').checked;
     graph.trace ? handleTracerOn() : handleTracerOff();

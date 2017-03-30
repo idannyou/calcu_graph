@@ -62205,7 +62205,10 @@ var plotXY = function plotXY(graph, equation, view) {
 
 var tickSize = function tickSize(graph) {
   var delta = graph.xMax - graph.xMin;
-  if (delta > 100) return 20;
+
+  if (delta > 200) {
+    return 10 ** (Math.floor(Math.log10(delta)) - 1) * 5;
+  }
   if (delta > 40) return 5;
   if (delta < 2) return .1;
   return 1;

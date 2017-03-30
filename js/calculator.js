@@ -24,11 +24,9 @@ const plotXY = function(graph, equation, view){
 const tickSize= function(graph){
     let delta = graph.xMax - graph.xMin;
 
-    if (delta > 200){
-      return 10 ** (Math.floor(Math.log10(delta))-1) * 5;
-    }
+    if (delta > 200) return 10 ** (Math.floor(Math.log10(delta))-1) * 5;
     if (delta > 40) return 5;
-    if (delta < 2) return .1;
+    if (delta < 2) return 10**Math.floor(Math.log10(delta/2));
     return 1;
 };
 

@@ -367,6 +367,7 @@ var Graph = function () {
     key: 'resetWindow',
     value: function resetWindow(xMin, xMax, yMin, yMax) {
       event.preventDefault();
+
       if (xMax > xMin && yMax > yMin) {
         this.clearGraph();
 
@@ -62188,7 +62189,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var plotXY = function plotXY(graph, equation, view) {
   event.preventDefault();
   var numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  var unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
+  var tickSize = graph.xMax - graph.xMin < 2 ? .1 : 1;
+  var unitsPerTick = parseFloat($('#unitTicks')[0].value) || tickSize;
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin) {
 
     graph.clearGraph();

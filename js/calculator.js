@@ -6,7 +6,8 @@ import View from './view';
 const plotXY = function(graph, equation, view){
   event.preventDefault();
   const numPoints = parseInt($('#numPoints')[0].value) || 1000;
-  const unitsPerTick = parseFloat($('#unitTicks')[0].value) || 1;
+  const tickSize = (graph.xMax - graph.xMin < 2)? .1 : 1;
+  const unitsPerTick = parseFloat($('#unitTicks')[0].value) || tickSize;
   if (graph.xMax > graph.xMin && graph.yMax > graph.yMin){
 
     graph.clearGraph();

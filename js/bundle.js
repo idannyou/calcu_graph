@@ -62256,6 +62256,7 @@ var handleTracerOn = function handleTracerOn() {
 
 var handleTracerOff = function handleTracerOff() {
   $('#tCoordinate').addClass('hidden');
+  $("#derivative")[0].checked = false;
   $("#derivative").attr("disabled", true);
 };
 

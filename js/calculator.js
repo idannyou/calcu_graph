@@ -74,6 +74,7 @@ const handleTracerOn = function(){
 
 const handleTracerOff = function(){
   $('#tCoordinate').addClass('hidden');
+  $("#derivative")[0].checked = false;
   $("#derivative").attr("disabled", true);
 };
 

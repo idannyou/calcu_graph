@@ -248,11 +248,29 @@ class Graph {
   zooming(){
     event.preventDefault();
     const scale = (event.deltaY) / 1000;
-    this.xMin = (this.xMin) - (this.xMin * scale);
-    this.xMax = (this.xMax) - (this.xMax * scale);
-    this.yMin = (this.yMin) - (this.yMin * scale);
-    this.yMax = (this.yMax) - (this.yMax * scale);
+    let prev_xMin = this.xMin;
+    let prev_xMax = this.xMax;
+    let prev_yMin = this.yMin;
+    let prev_yMax = this.yMax;
+
+    if (this.xMax - this.xMin > .1 && this.yMax - this.yMin > .1){
+      this.xMin = (this.xMin) - (this.xMin * scale);
+      this.xMax = (this.xMax) - (this.xMax * scale);
+      this.yMin = (this.yMin) - (this.yMin * scale);
+      this.yMax = (this.yMax) - (this.yMax * scale);
+    } else {
+      let scale_2 = (.101 + prev_xMin - prev_xMax) / (prev_xMin - prev_xMax);
+      this.xMin = prev_xMin - (prev_xMin * scale_2);
+      this.xMax = prev_xMax - (prev_xMax * scale_2);
+      this.yMin = prev_yMin - (prev_yMin * scale_2);
+      this.yMax = prev_yMax - (prev_yMax * scale_2);
+    }
   }
+
+// xMin - (xMin * scale)> .1
+// xMin (1-scale) > .1
+// 1-scale > .1/xMin
+// 1 - .1/xMin = scale
 
   onClick(){
     event.preventDefault();

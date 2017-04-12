@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // zooming
+
   $('#canvas').on('wheel', () => {
     graph.zooming();
     plotXY(graph, equation, view);

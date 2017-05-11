@@ -12,12 +12,23 @@ const plotXY = function(graph, equation, view){
     graph.clearGraph();
     graph.drawAxis(unitsPerTick);
     const deltaX = ((graph.xMax - graph.xMin) / numPoints);
+    // finding x_graph_min
+    let x, y;
+    let xArray = [];
     for (let i = 0; i < numPoints; i++) {
-      const x = (graph.xMin)+ (deltaX * i);
-      const y = equation.extractY(x);
+      x = (graph.xMin)+ (deltaX * i);
+      y = equation.extractY(x);
       if(y >= graph.yMin && y <= graph.yMax){
-        graph.drawDots(x, y);
+        xArray.push(x);
       }
+    }
+    let xMin = xArray[0];
+    let newDeltaX = ((xArray[xArray.length - 1] - xMin) / numPoints);
+
+    for (let i = 0; i < numPoints; i++) {
+      x = (xMin)+ (newDeltaX * i);
+      y = equation.extractY(x);
+      graph.drawDots(x, y);
     }
     view.displayMinMax(graph);
   }

@@ -62213,12 +62213,24 @@ var plotXY = function plotXY(graph, equation, view) {
     graph.clearGraph();
     graph.drawAxis(unitsPerTick);
     var deltaX = (graph.xMax - graph.xMin) / numPoints;
+    // finding x_graph_min
+    var x = void 0,
+        y = void 0;
+    var xArray = [];
     for (var i = 0; i < numPoints; i++) {
-      var x = graph.xMin + deltaX * i;
-      var y = equation.extractY(x);
+      x = graph.xMin + deltaX * i;
+      y = equation.extractY(x);
       if (y >= graph.yMin && y <= graph.yMax) {
-        graph.drawDots(x, y);
+        xArray.push(x);
       }
+    }
+    var xMin = xArray[0];
+    var newDeltaX = (xArray[xArray.length - 1] - xMin) / numPoints;
+
+    for (var _i = 0; _i < numPoints; _i++) {
+      x = xMin + newDeltaX * _i;
+      y = equation.extractY(x);
+      graph.drawDots(x, y);
     }
     view.displayMinMax(graph);
   }

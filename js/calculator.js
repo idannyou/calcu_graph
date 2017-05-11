@@ -12,7 +12,7 @@ const plotXY = function(graph, equation, view){
     graph.clearGraph();
     graph.drawAxis(unitsPerTick);
     const deltaX = ((graph.xMax - graph.xMin) / numPoints);
-    // finding x_graph_min
+    // finding x_graph_min and x_graph_max
     let x, y;
     let xArray = [];
     for (let i = 0; i < numPoints; i++) {
@@ -22,6 +22,7 @@ const plotXY = function(graph, equation, view){
         xArray.push(x);
       }
     }
+    // new delta X
     let xMin = xArray[0];
     let newDeltaX = ((xArray[xArray.length - 1] - xMin) / numPoints);
 

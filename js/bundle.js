@@ -62213,7 +62213,7 @@ var plotXY = function plotXY(graph, equation, view) {
     graph.clearGraph();
     graph.drawAxis(unitsPerTick);
     var deltaX = (graph.xMax - graph.xMin) / numPoints;
-    // finding x_graph_min
+    // finding x_graph_min and x_graph_max
     var x = void 0,
         y = void 0;
     var xArray = [];
@@ -62224,6 +62224,7 @@ var plotXY = function plotXY(graph, equation, view) {
         xArray.push(x);
       }
     }
+    // new delta X
     var xMin = xArray[0];
     var newDeltaX = (xArray[xArray.length - 1] - xMin) / numPoints;
 

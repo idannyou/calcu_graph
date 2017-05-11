@@ -15,7 +15,9 @@ const plotXY = function(graph, equation, view){
     for (let i = 0; i < numPoints; i++) {
       const x = (graph.xMin)+ (deltaX * i);
       const y = equation.extractY(x);
-      graph.drawDots(x, y);
+      if(y >= graph.yMin && y <= graph.yMax){
+        graph.drawDots(x, y);
+      }
     }
     view.displayMinMax(graph);
   }

@@ -62216,7 +62216,9 @@ var plotXY = function plotXY(graph, equation, view) {
     for (var i = 0; i < numPoints; i++) {
       var x = graph.xMin + deltaX * i;
       var y = equation.extractY(x);
-      graph.drawDots(x, y);
+      if (y >= graph.yMin && y <= graph.yMax) {
+        graph.drawDots(x, y);
+      }
     }
     view.displayMinMax(graph);
   }

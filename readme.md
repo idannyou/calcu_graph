@@ -1,6 +1,6 @@
 # CalcuGraph
 
-[CalcuGraph](http://dannyou.pro/calcu_graph/)
+[CalcuGraph](https://idannyou.github.io/calcu_graph/)
 
 ## Summary
 
